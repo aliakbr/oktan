@@ -2,10 +2,9 @@
 Oktan website repository.
 
 ## Installation
-Put this repo to your webserver directory
-If you use XAMPP as webserver manager put this repo to `../xampp/htdocs/`
+Put this repo to your webserver directory. If you use XAMPP as webserver manager put this repo to `../xampp/htdocs/`
 
-## Tools Used For This project-name
+## Tools Used For This Project
 Basic PHP + HTML + CSS
 
 ## Copyright and License
