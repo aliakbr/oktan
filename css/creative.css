@@ -104,6 +104,8 @@ body {
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
+    padding-right: 15px;
+    padding-left: 15px;
     color: #222222; }
     #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover,
     #mainNav .navbar-nav > li.nav-item > a.nav-link:hover {
@@ -115,6 +117,9 @@ body {
       #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active:hover,
       #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
         background-color: transparent; }
+    #mainNav .ml-auto {
+      padding-right: 20px;
+    }
   @media (min-width: 992px) {
     #mainNav {
       border-color: rgba(255, 255, 255, 0.3);
@@ -154,7 +159,7 @@ header.masthead {
   min-height: auto;
   text-align: center;
   color: white;
-  background-image: url("../img/background.jpg");
+  background-image: url("../img/background.png");
   background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
