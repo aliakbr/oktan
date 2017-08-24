@@ -15,6 +15,7 @@ Basic PHP + HTML + CSS
 - [ ] Add Photo for Gallery Form
 - [ ] Add Sponsorship Form
 - [ ] Add Backend Handler (Need Triage! Breakdown ASAP)
+- [ ] Add News Page (Like a blog)
 
 ## Copyright and License
 For front-end template :
