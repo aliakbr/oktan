@@ -11,10 +11,10 @@ Basic PHP + HTML + CSS
 - [x] Landing Page Prototype
 - [x] Admin Page Prototype
 - [x] Add Registration Form and Profile Page Prototype (On Progress)
-- [] Add News Form
-- [] Add Photo for Gallery Form
-- [] Add Sponsorship Form
-- [] Add Backend Handler (Need Triage! Breakdown ASAP)
+- [ ] Add News Form
+- [ ] Add Photo for Gallery Form
+- [ ] Add Sponsorship Form
+- [ ] Add Backend Handler (Need Triage! Breakdown ASAP)
 
 ## Copyright and License
 For front-end template :
