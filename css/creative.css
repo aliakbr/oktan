@@ -45,7 +45,8 @@ p {
 
 .bg-dark {
   color: white;
-  background-color: #63705e !important; }
+  background-color: #63705e !important;
+  padding-bottom: 10px; }
 
 .bg-secondary {
   background-color: #dde7ce !important; }
@@ -205,6 +206,7 @@ header.masthead {
             max-width: 80%;
             margin-right: auto;
             margin-left: auto; } }
+
 
 .service-box {
   max-width: 400px;
@@ -558,4 +560,23 @@ CSS for Timeline line
             left: -14px;
             right: auto;
         }
+}
+
+.link-social { 
+  transition: all .2s ease-in-out; }
+.link-social:hover { transform: scale(1.4); }
+
+@media (min-width: 768px) {
+  .link-social{
+    padding: 5px;
+  }
+}
+
+.text-hidden {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  color: transparent;
 }
