@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" type="image/png" sizes="96x96" href="img/asset/favicon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
   <title>Halaman Login | Oktan ITB 2018</title>
-  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'oktan/css/login.css' %}">
 </head>
 <body>
   <div class="login-page">
     <div class="form">
-      <a href="index.html"><img src="img/asset/thumbnail/logo.png"></a>
+      <a href="{% url 'oktansite:index' %}"><img src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></a>
       <form class="register-form">
         <input type="text" placeholder="nama tim"/>
         <input type="text" placeholder="asal sekolah"/>
@@ -30,7 +31,7 @@
       </form>
     </div>
   </div>
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="js/login.js"></script>
+  <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'oktan/js/login.js' %}"></script>
 </body>
 </html>

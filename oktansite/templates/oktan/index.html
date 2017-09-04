@@ -56,7 +56,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Login/Register</a>
+            <a class="nav-link" href="{% url 'oktansite:login_page' %}">Login/Register</a>
           </li>
         </ul>
       </div>
@@ -76,11 +76,11 @@
             <p class="text-faded">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis ipsum augue, sit amet efficitur eros sodales eget. Aenean justo odio, condimentum ornare tellus id, sodales lobortis turpis. Nulla facilisi. Etiam vehicula ex at ligula feugiat, id sollicitudin velit semper. Maecenas scelerisque risus sit amet gravida luctus. Donec ac ornare ante, sit amet consequat dui. Integer eu tortor aliquet, tristique lacus vel, vehicula orci.
             </p>
-            <a class="btn btn-default btn-xl sr-button" href="login.html">Daftar Sekarang!</a>
+            <a class="btn btn-default btn-xl sr-button" href="{% url 'oktansite:login_page' %}">Daftar Sekarang!</a>
           </div>
           <div class="col-lg-4 mx-auto text-center">
 	          <div class="thumbnail">
-	            <img style="max-width: 250px; padding-top: 25px;" src="img/asset/mascot.png">
+	            <img style="max-width: 250px; padding-top: 25px;" src="{% static 'oktan/img/asset/mascot.png' %}">
 	          </div>
 	      </div>
         </div>

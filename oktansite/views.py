@@ -10,7 +10,7 @@ def login_page(request):
     return render(request, template)
 
 def administration(request):
-    template = 'oktan/administratsi.html'
+    template = 'oktan/administrasi.html'
     return render(request, template)
 
 def user(request):
