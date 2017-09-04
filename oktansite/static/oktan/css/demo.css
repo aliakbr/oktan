@@ -1,0 +1,106 @@
+@media (min-width: 992px){
+    .typo-line{
+        padding-left: 140px;
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .typo-line .category{
+        transform: translateY(-50%);
+        top: 50%;
+        left: 0px;
+        position: absolute;
+    }
+}
+
+.all-icons [class*="pe-"]{
+    font-size: 40px;
+}
+.all-icons input{
+    border: 0;
+}
+.all-icons .font-icon-detail{
+    text-align: center;
+    padding: 45px 0px 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+.all-icons .font-icon-detail input{
+    margin: 25px auto 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+}
+
+#map{
+    position:relative;
+    width:100%;
+    height: calc(100% - 60px);
+}
+
+.places-buttons .btn{
+    margin-bottom: 30px
+}
+.sidebar .nav > li.active-pro{
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+.sidebar .nav > li.active-pro a{
+    background: rgba(255, 255, 255, 0.14);
+    opacity: 1;
+    color: #FFFFFF;
+}
+
+.table-upgrade td:nth-child(2),
+.table-upgrade td:nth-child(3){
+    text-align: center;
+}
+
+.welcome h1, .welcome h2, .welcome h4 {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.welcome h1 {
+    margin-top: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.welcome h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.welcome h4 {
+    font-size: 1.8rem;
+    margin-top: 0;
+}    
+
+@media (min-width: 40em){
+    .welcome h1, .welcome h2, .welcome h4 {
+        padding-left: 0;
+    }
+    .welcome h1 {
+        margin-top: 1rem;
+        font-size: 5rem;
+        font-weight: 700;
+    }
+
+    .welcome h2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+
+    .welcome h4 {
+        font-size: 2rem;
+        margin-top: 0;
+    }    
+}
