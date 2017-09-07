@@ -49,7 +49,6 @@ def logout(request):
     return redirect(reverse('oktansite:index'))
 
 def register(request):
-    #Still Dummy
     template = 'oktan/login.html'
     if request.method == 'POST':
         email= request.POST['email']
@@ -77,6 +76,9 @@ def register(request):
                 return redirect('oktansite:administrasi')
             else:
                 return render(request, template)
-        except (ValidationError, err):
-            print ('; '.join(err.messages))
+        except ValidationError as e:
+            message = ';'.join(e.messages)
+            return render(request, template, {
+                'error_message': message
+            })
     return render(request, template)

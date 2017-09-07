@@ -3,6 +3,7 @@ Django model file
 """
 
 import os
+import uuid
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
@@ -121,7 +122,7 @@ class Team(models.Model):
         Team Model
     """
     account = models.OneToOneField(Account, on_delete=models.CASCADE, null=True)
-    id_team = models.AutoField(primary_key=True)
+    id_team = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     team_name = models.CharField(max_length=50, null=False, unique=True)
     supervisor_name = models.CharField(max_length=50, null=False)
     school_name = models.CharField(max_length=150, null=False)
