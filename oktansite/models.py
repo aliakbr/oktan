@@ -75,6 +75,30 @@ class AccountManager(BaseUserManager):
     def get_by_natural_key(self, email_):
         return self.get(email=email_)
 
+class Team(models.Model):
+    """
+        Team Model
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    team_name = models.CharField(max_length=50, null=False, unique=True)
+    supervisor_name = models.CharField(max_length=50, null=False)
+    school_name = models.CharField(max_length=150, null=False)
+    proof_of_payment = models.FileField(upload_to=get_upload_path_images_payment)
+    student_name_1 = models.CharField(max_length=50, null=True)
+    student_phone_number_1 = models.CharField(max_length=50, null=True)
+    student_id_card_1 = models.CharField(max_length=50, null=True)
+    student_card_image_1 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
+    student_name_2 = models.CharField(max_length=50, null=True)
+    student_phone_number_2 = models.CharField(max_length=50, null=True)
+    student_id_card_2 = models.CharField(max_length=50, null=True)
+    student_card_image_2 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
+    def __str__(self):
+        return self.team_name
+
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        super(Team,self).save(*args, **kwargs)
+
 class Account(AbstractBaseUser):
     """
     Account model
@@ -85,7 +109,7 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     email_confirmed = models.BooleanField(default=False)
     objects = AccountManager()
-
+    team = models.OneToOneField(Team, on_delete=models.CASCADE, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
@@ -116,31 +140,6 @@ class Account(AbstractBaseUser):
     def save(self, *args,**kwargs):
         self.validate_unique()
         super(Account,self).save(*args, **kwargs)
-
-class Team(models.Model):
-    """
-        Team Model
-    """
-    account = models.OneToOneField(Account, on_delete=models.CASCADE, null=True)
-    id_team = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    team_name = models.CharField(max_length=50, null=False, unique=True)
-    supervisor_name = models.CharField(max_length=50, null=False)
-    school_name = models.CharField(max_length=150, null=False)
-    proof_of_payment = models.FileField(upload_to=get_upload_path_images_payment)
-    student_name_1 = models.CharField(max_length=50, null=True)
-    student_phone_number_1 = models.CharField(max_length=50, null=True)
-    student_id_card_1 = models.CharField(max_length=50, null=True)
-    student_card_image_1 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
-    student_name_2 = models.CharField(max_length=50, null=True)
-    student_phone_number_2 = models.CharField(max_length=50, null=True)
-    student_id_card_2 = models.CharField(max_length=50, null=True)
-    student_card_image_2 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
-    def __str__(self):
-        return self.team_name
-
-    def save(self, *args,**kwargs):
-        self.validate_unique()
-        super(Team,self).save(*args, **kwargs)
 
 class Gallery(models.Model):
     """
