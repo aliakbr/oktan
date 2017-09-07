@@ -1,8 +1,12 @@
 """
 Django model file
 """
+
 import os
 from django.db import models
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser
+)
 
 def get_upload_path_images_payment(instance, filename):
     """
@@ -36,31 +40,106 @@ def get_upload_path_images_gallery(instance, filename):
     return os.path.join(upload_dir, filename)
 
 # Create your models here.
+
+class AccountManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+            password=password
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(email,
+            password=password,
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
+    def get_by_natural_key(self, email_):
+        return self.get(email=email_)
+
+class Account(AbstractBaseUser):
+    """
+    Account model
+    """
+    password = models.CharField(max_length=50, null=False)
+    email = models.EmailField(null=False, unique=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    email_confirmed = models.BooleanField(default=False)
+    objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['password']
+
+    def get_full_name(self):
+        # The user is identified by their email address
+        return self.email
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.email
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def natural_key(self):
+        return self.email
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        super(Account,self).save(*args, **kwargs)
+
 class Team(models.Model):
     """
         Team Model
     """
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, null=True)
     id_team = models.AutoField(primary_key=True)
-    team_name = models.CharField(max_length=50, null=False)
-    password = models.CharField(max_length=50, null=False)
-    email = models.EmailField(null=False)
+    team_name = models.CharField(max_length=50, null=False, unique=True)
     supervisor_name = models.CharField(max_length=50, null=False)
-    school = models.CharField(max_length=150, null=False)
+    school_name = models.CharField(max_length=150, null=False)
     proof_of_payment = models.FileField(upload_to=get_upload_path_images_payment)
+    student_name_1 = models.CharField(max_length=50, null=True)
+    student_phone_number_1 = models.CharField(max_length=50, null=True)
+    student_id_card_1 = models.CharField(max_length=50, null=True)
+    student_card_image_1 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
+    student_name_2 = models.CharField(max_length=50, null=True)
+    student_phone_number_2 = models.CharField(max_length=50, null=True)
+    student_id_card_2 = models.CharField(max_length=50, null=True)
+    student_card_image_2 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
     def __str__(self):
         return self.team_name
 
-class Member(models.Model):
-    """
-        Team_member model
-    """
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=50)
-    student_id = models.CharField(max_length=50, primary_key=True)
-    student_card = models.FileField(upload_to=get_upload_path_images_student_card)
-    def __str__(self):
-        return self.name
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        super(Team,self).save(*args, **kwargs)
 
 class Gallery(models.Model):
     """

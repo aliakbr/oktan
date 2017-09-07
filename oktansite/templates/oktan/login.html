@@ -11,27 +11,31 @@
   <link rel="stylesheet" type="text/css" href="{% static 'oktan/css/login.css' %}">
 </head>
 <body>
+  {% block content %}
   <div class="login-page">
     <div class="form">
       <a href="{% url 'oktansite:index' %}"><img src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></a>
-      <form class="register-form">
-        <input type="text" placeholder="nama tim"/>
-        <input type="text" placeholder="asal sekolah"/>
-        <input type="text" placeholder="nama guru pembimbing"/>
-        <input type="text" placeholder="alamat email"/>
-        <input type="password" placeholder="password"/>
-        <button>buat akun</button>
+      <form class="register-form" method="POST" action="{% url 'oktansite:register' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="nama tim" name="team_name"/>
+        <input type="text" placeholder="asal sekolah" name="school_name"/>
+        <input type="text" placeholder="nama guru pembimbing" name="supervisor"/>
+        <input type="email" placeholder="alamat email" name="email"/>
+        <input type="password" placeholder="password" name="password"/>
+        <button type=submit>buat akun</button>
         <p class="message">Sudah mendaftar? <a href="#">Masuk disini</a></p>
       </form>
-      <form class="login-form">
-        <input type="text" placeholder="alamat email"/>
-        <input type="password" placeholder="password"/>
-        <button>masuk</button>
+      <form class="login-form" method="POST" action="{% url 'oktansite:login' %}">
+        {% csrf_token %}
+        <input type="email" placeholder="alamat email" name="email"/>
+        <input type="password" placeholder="password" name="password"/>
+        <button type=submit>masuk</button>
         <p class="message">Belum punya akun? <a href="#">Mendaftar disini</a></p>
       </form>
     </div>
   </div>
   <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'oktan/js/login.js' %}"></script>
+  {% endblock %}
 </body>
 </html>

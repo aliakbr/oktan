@@ -70,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'oktan.wsgi.application'
 
+ROOT_URLCONF = 'oktan.urls'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -100,13 +101,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# User model
+AUTH_USER_MODEL = "oktansite.Account"
+
+# Backend settings
+AUTHENTICATION_BACKENDS = (
+    'oktansite.backend.OktanBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 
@@ -117,5 +126,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
+LOGIN_URL = '/login/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
+STATIC_ROOT = 'public/static/'
