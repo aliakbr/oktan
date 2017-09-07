@@ -23,6 +23,23 @@ def administration(request):
             'team': team
         })
     else:
+        try:
+            obj = Team.objects.get(pk=team.id)
+            obj.school_name = request.POST["school_name"]
+            obj.supervisor_name = request.POST["supervisor_name"]
+            obj.team_name = request.POST["team_name"]
+            obj.save()
+            message = "Data Modified!"
+            return render(request, template, {
+                'message': message,
+                'team': obj
+            })
+        except ValidationError as e:
+            message = ';'.join(e.messages)
+            return render(request, template, {
+                'message': message,
+                'team': team
+            })
         return render(request, template)
 
 @login_required
