@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% block content %}
 <html lang="en">
 
   <head>
@@ -55,9 +56,15 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'oktansite:user' %}">Halo, {{ user.team.team_name }}</a>
+            </li>
+          {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'oktansite:login' %}">Login/Register</a>
           </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -302,3 +309,4 @@
   </body>
 
 </html>
+{% endblock %}

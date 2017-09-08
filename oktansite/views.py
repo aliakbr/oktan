@@ -45,24 +45,30 @@ def administration(request):
 @login_required
 def user(request):
     template = 'oktan/user.html'
-    if request.method == 'GET':
-        team = request.user.team
-        return render(request, template, {
-            'team': team
-        })
-    else:
-        return render(request, template)
+    return render(request, template)
 
 @login_required
 def member(request):
     template = 'oktan/member.html'
+    team = request.user.team
     if request.method == 'GET':
-        team = request.user.team
         return render(request, template, {
             'team': team
         })
     else:
-        return render(request, template)
+        obj = Team.objects.get(pk=team.id)
+        obj.student_name_1 = request.POST["student_name_1"]
+        obj.student_id_number_1 = request.POST["student_id_number_1"]
+        obj.student_phone_number_1 = request.POST["student_phone_number_1"]
+        obj.student_name_2 = request.POST["student_name_2"]
+        obj.student_id_number_2 = request.POST["student_id_number_2"]
+        obj.student_phone_number_2 = request.POST["student_phone_number_2"]
+        obj.save()
+        message = "Data Modified!"
+        return render(request, template, {
+            'message': message,
+            'team': obj
+        })
 
 def login(request):
     if request.user.is_authenticated:
@@ -74,10 +80,9 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
         acc = authenticate(email=email, password=password)
-        print (acc)
         if acc is not None:
             auth_login(request, acc)
-            return redirect('oktansite:administrasi')
+            return redirect('oktansite:user')
         else:
             return render(request, template)
 
