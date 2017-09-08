@@ -14,6 +14,7 @@ def get_upload_path_images_payment(instance, filename):
         Function to get upload image payment proof dir path
     """
     upload_dir = os.path.join('media', "%s" % instance.team_name)
+    filename = "payment_" + instance.team_name + "_" + filename
     print(upload_dir)
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
@@ -23,8 +24,8 @@ def get_upload_path_images_student_card(instance, filename):
     """
         Function to get upload image student card dir path
     """
-    upload_dir = os.path.join('media', "%s" % instance.team.team_name)
-    upload_dir = os.path.join(upload_dir, "%s" % instance.name)
+    upload_dir = os.path.join('media', "%s" % instance.team_name)
+    filename = "student_id_" + instance.team_name + "_" + filename
     print(upload_dir)
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)

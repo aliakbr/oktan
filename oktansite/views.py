@@ -28,6 +28,8 @@ def administration(request):
             obj.school_name = request.POST["school_name"]
             obj.supervisor_name = request.POST["supervisor_name"]
             obj.team_name = request.POST["team_name"]
+            if 'payment_proof' in request.FILES:
+                obj.proof_of_payment = request.FILES['payment_proof']
             obj.save()
             message = "Data Modified!"
             return render(request, template, {
@@ -60,9 +62,13 @@ def member(request):
         obj.student_name_1 = request.POST["student_name_1"]
         obj.student_id_number_1 = request.POST["student_id_number_1"]
         obj.student_phone_number_1 = request.POST["student_phone_number_1"]
+        if 'student_card_image_1' in request.FILES:
+            obj.student_card_image_1 = request.FILES['student_card_image_1']
         obj.student_name_2 = request.POST["student_name_2"]
         obj.student_id_number_2 = request.POST["student_id_number_2"]
         obj.student_phone_number_2 = request.POST["student_phone_number_2"]
+        if 'student_card_image_2' in request.FILES:
+            obj.student_card_image_2 = request.FILES['student_card_image_2']
         obj.save()
         message = "Data Modified!"
         return render(request, template, {
