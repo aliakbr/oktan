@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^member/', views.member, name='member'),
     url(r'^user/', views.user, name='user'),
     url(r'^logout/', views.logout, name='logout'),
+    url(r'^loginadmin/', views.login_admin, name="loginadmin"),
+    url(r'^admin/', views.admin_dashboard, name="admindashboard")
 ]

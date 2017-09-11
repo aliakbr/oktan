@@ -14,6 +14,14 @@ def login_page(request):
     template = 'oktan/login.html'
     return render(request, template)
 
+def login_admin(request):
+    template = 'oktan/login-admin.html'
+    return render(request, template)
+
+def admin_dashboard(request):
+    template = 'oktan/admin-dashboard.html'
+    return render(request, template)
+
 @login_required
 def administration(request):
     template = 'oktan/administrasi.html'
