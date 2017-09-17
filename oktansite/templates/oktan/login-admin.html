@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,23 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" type="../image/png" sizes="96x96" href="../img/asset/favicon.png">
+  <link rel="icon" type="../image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
   <title>Admin | Oktan ITB 2018</title>
-  <link rel="stylesheet" type="text/css" href="../css/login.css">
-  <link rel="stylesheet" type="text/css" href="../css/admin.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'oktan/css/login.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'oktan/css/admin.css' %}">
 </head>
 <body>
+  {% block content %}
   <div class="login-page">
     <div class="form">
-      <a href="../index.html"><img src="../img/asset/thumbnail/logo.png"></a>
-      <form class="login-form">
-        <input type="text" placeholder="username"/>
-        <input type="password" placeholder="password"/>
-        <a href="../admin/admin-dashboard.html" class="login-button">masuk</a>
+      <a href="{% url 'oktansite:index' %}"><img src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></a>
+      <form class="login-form" method="POST" action="{% url 'oktansite:login_admin' %}">
+        {% csrf_token %}
+        <input type="text" name="email" placeholder="email"/>
+        <input type="password" name="password" placeholder="password"/>
+        <button type="submit">Login</button>
       </form>
     </div>
   </div>
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script type="../text/javascript" src="js/login.js"></script>
+  <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'oktan/js/login.js' %}"></script>
+  {% endblock %}
 </body>
 </html>
