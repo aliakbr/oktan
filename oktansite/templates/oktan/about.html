@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
+    <title>Oktan ITB 2018</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'oktan/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'oktan/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'oktan/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'oktan/css/creative.css' %}" rel="stylesheet">
+  </head>
+
+  <body id="about">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <a class="navbar-brand" href="{% url 'oktansite:index' %}">
+        <img class="navbar-brand" src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></img>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:news' %}">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:gallery' %}">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'oktansite:user' %}">Halo, {{ user.team.team_name }}</a>
+            </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'oktansite:login' %}">Login/Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="header-content">
+      </div>
+    </header>
+
+    <section class="bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <img class="img-responsive" style="width: 250px; padding: 0 5px; padding-bottom: 10px;" src="{% static 'oktan/img/asset/logo.png' %}" alt="Logo Oktan">
+            <h5 class="section-heading">Logo Oktan</h5>
+            <hr class="primary">
+          </div>
+          <div class="col-lg-12 text-center">
+            <p>
+                <strong>"OKTAN"</strong> atau <strong> Olimpiade Kimia Tingkat Nasional</strong> adalah acara yang digagas dan diselenggarakan oleh Himpunan Mahasiswa Kimia 'AMISCA' ITB pada tahun 2017.
+                Olimpiade ini diselenggarakan untuk pelajar tingkat SMA/SMU/SMK sederajat. OKTAN ITB 2017 ini diselenggarakan untuk yang keempat kalinya oleh HMK ‘AMISCA’ ITB.
+                Kompetisi ini diharapkan dapat mendukung proses pembelajaran ilmu kimia terhadap para siswa dan siswi serta dapat melihat keberterimaan materi yang telah diberikan di setiap sekolah.
+            </p>
+          </div>
+          <div class="col-lg-12 text-center">
+                <p>
+                        <strong>Olimpiade Kimia</strong> <br>
+                        Olimpiade ini digunakan sebagai ajang kompetisi dalam bidang kimia untuk pelajar SMA/sederajat. 
+                        Terdiri dari babak penyisihan yang diadakan pada bulan Januari 2016 di 21 subrayon se-Indonesia. 
+                        Peserta yang berhasil melalui tahap penyisihan akan diundang ke Bandung sebagai semifinalis OKTAN ITB 2016.
+                </p>
+          </div>
+          <br>
+          <div class="col-lg-12 text-center" style="margin-top: 30px;">
+                <h5>Perkenalan Singkat Panitia</h5>
+                <img src="{% static 'oktan/img/asset/organigram.jpg' %}" alt="Organigram Panitia">
+          </div>
+          <div class="col-lg-12 text-center" style="margin-top: 30px;">
+                <h5>Subrayon OKTAN ITB 2018</h5>
+                <img src="{% static 'oktan/img/asset/subrayon.png' %}" alt="Organigram Panitia">
+          </div>      
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Penyelenggara</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/penyelenggara.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Sponsor</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/sponsor.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Media Partner</h2>
+            <hr class="light">
+            <div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/media-partner.png' %}">
+          	</div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+			<div class=" col-lg-8 mx-auto text-center">
+				<a href="https://facebook.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/fb.png' %}" width="50px"><span class="text-hidden">Facebook</span></a>
+				<a href="https://twitter.com/itboktan/"><img class="link-social" src="{% static 'oktan/img/asset/twitter.png' %}" width="50px"><span class="text-hidden">Twitter</span></a>
+				<a href="https://instagram.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/instagram.png' %}" width="50px"><span class="text-hidden">Instagram</span></a>
+				<a href="https://ask.fm/oktanitb"><img class="link-social" src="{% static 'oktan/img/asset/askfm.png' %}" width="50px"><span class="text-hidden">Askfm</span></a>
+				<a href="https://line.me/"><img class="link-social" src="{% static 'oktan/img/asset/line.png' %}" width="50px"><span class="text-hidden">Line</span></a>
+				<a href="https://youtube.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/youtube.png' %}" width="50px"><span class="text-hidden">Youtube</span></a>
+				<hr class="light">
+			</div>
+        </div>
+        <br>
+        <div class="row">
+        	<div class="col-lg-8 mx-auto text-center">
+        		<p> Copyright &copy; OKTAN ITB 2018</p>
+        	</div>
+      	</div>
+      </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'oktan/js/creative.js' %}"></script>
+    <script src="{% static 'oktan/js/timeline.js' %}"></script>
+  </body>
+
+</html>
+{% endblock %}

@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
 
     <!-- Plugin CSS -->
-    <link href="{% static 'oktan/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'oktan/css/creative.css' %}" rel="stylesheet">
@@ -35,7 +35,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <a class="navbar-brand" href="#page-top">
-        <img class="navbar-brand" src="{% static 'img/asset/thumbnail/logo.png' %}"></img>
+        <img class="navbar-brand" src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></img>
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,13 +43,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="{% url 'oktansite:about' %}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#timeline">Timeline</a>
+            <a class="nav-link" href="{% url 'oktansite:news' %}">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#gallery">Gallery</a>
+            <a class="nav-link" href="{% url 'oktansite:gallery' %}">Gallery</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -74,7 +74,7 @@
       </div>
     </header>
 
-    <section class="bg-primary" id="about">
+    <section class="bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
@@ -94,7 +94,7 @@
       </div>
     </section>
 
-    <section id="timeline" class="bg-secondary">
+    <section class="bg-secondary">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
@@ -201,74 +201,28 @@
       </div>
     </section>
 
-    <section class="p-0 bg-secondary" id="gallery">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Gallery</h2>
-            <hr class="primary">
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid">
-        <div class="row no-gutter popup-gallery">
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/1.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/1.jpg' %}" alt="">
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/2.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/2.jpg' %}" alt="">
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/3.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/3.jpg' %}" alt="">
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/4.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/4.jpg' %}" alt="">
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/5.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/5.jpg' %}" alt="">
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="{% static 'oktan/img/portfolio/fullsize/6.jpg' %}">
-              <img class="img-fluid" src="{% static 'oktan/img/portfolio/thumbnails/6.jpg' %}" alt="">
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="bg-dark">
+    <section class="bg-dark">
       <div class="container">
         <div class="row">
           <div class="col-lg-4 text-center">
           	<h2 class="section-heading text-white">Penyelenggara</h2>
             <hr class="light">
           	<div class="thumbnail">
-          		<img style="width: 95%; max-width: 350px" src="img/asset/penyelenggara.png">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/penyelenggara.png' %}">
           	</div>
           </div>
           <div class="col-lg-4 text-center">
           	<h2 class="section-heading text-white">Sponsor</h2>
             <hr class="light">
           	<div class="thumbnail">
-          		<img style="width: 95%; max-width: 350px" src="img/asset/sponsor.png">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/sponsor.png' %}">
           	</div>
           </div>
           <div class="col-lg-4 text-center">
           	<h2 class="section-heading text-white">Media Partner</h2>
             <hr class="light">
             <div class="thumbnail">
-          		<img style="width: 95%; max-width: 350px" src="img/asset/media-partner.png">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/media-partner.png' %}">
           	</div>
           </div>
         </div>
@@ -301,7 +255,7 @@
     <!-- Plugin JavaScript -->
     <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
     <script src="{% static 'oktan/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-    <script src="{% static 'oktan/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'oktan/js/creative.js' %}"></script>

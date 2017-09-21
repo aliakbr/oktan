@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
+    <title>Oktan ITB 2018</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'oktan/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'oktan/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'oktan/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'oktan/css/clean-blog.css' %}" rel="stylesheet">
+    <link href="{% static 'oktan/css/creative.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="news">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <a class="navbar-brand" href="{% url 'oktansite:index' %}">
+        <img class="navbar-brand" src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></img>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#news">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:gallery' %}">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'oktansite:user' %}">Halo, {{ user.team.team_name }}</a>
+            </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'oktansite:login' %}">Login/Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="header-content">
+      </div>
+    </header>
+
+    <section class="bg-secondary">
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Berita OKTAN ITB 2018</h2>
+                <hr class="primary">
+            </div>
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
+                    <a href="post.html">
+                    <h2 class="post-title">
+                        Man must explore, and this is exploration at its greatest
+                    </h2>
+                    </a>
+                    <p class="post-subtitle">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et mattis tellus. Curabitur dapibus magna non nunc vestibulum lobortis. Mauris et tristique nisl. Nullam condimentum et erat ac elementum. Suspendisse id sem porttitor, pharetra nunc in, faucibus metus. Suspendisse ultrices velit sit amet neque luctus, ac eleifend mi pretium. Fusce consequat metus sed tellus tempus, at accumsan nisi euismod. Aliquam cursus et nibh sed accumsan. Quisque posuere elit elit. In a dolor turpis. Maecenas blandit, nibh vel tincidunt vehicula, libero lectus semper tortor, quis gravida elit augue at dolor. Donec elementum ipsum urna, sed luctus tortor iaculis in. Nunc ut.
+                    </p>
+                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
+                    <p class="post-meta">Posted by
+                    <a href="#">Admin Oktan</a>
+                    on September 24, 2017</p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                    <a href="post.html">
+                    <h2 class="post-title">
+                        Science has not yet mastered prophecy
+                    </h2>
+                    </a>
+                    <p class="post-subtitle">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sollicitudin eros sed leo consectetur, quis euismod sapien ultricies. Praesent feugiat at nisl nec tincidunt. Nulla molestie magna sit amet tortor ullamcorper blandit. Nullam vitae consequat ligula. Proin eu felis nec nisl rhoncus pellentesque. Phasellus laoreet ultricies lacus sit amet scelerisque. Sed feugiat fermentum lacus a placerat. In hac habitasse platea dictumst. Mauris consequat odio eget est lobortis, eu interdum metus finibus. Donec interdum lobortis lacus, at faucibus massa efficitur vel.
+                    </p>
+                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">daftarpeserta.pdf</a></p>
+                    <p class="post-meta">Posted by
+                    <a href="#">Admin Oktan</a>
+                    on August 24, 2017</p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                    <a href="post.html">
+                    <h2 class="post-title">
+                        Failure is not an option
+                    </h2>
+                    </a>
+                    <p class="post-subtitle">
+                        Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+                    </p>
+                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
+                    <p class="post-meta">Posted by
+                    <a href="#">Admin Oktan</a>
+                    on July 8, 2017</p>
+                </div>
+                <hr>
+                <!-- Pager -->
+                <div class="clearfix">
+                    <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+                </div>
+            </div>      
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Penyelenggara</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/penyelenggara.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Sponsor</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/sponsor.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Media Partner</h2>
+            <hr class="light">
+            <div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/media-partner.png' %}">
+          	</div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+			<div class=" col-lg-8 mx-auto text-center">
+				<a href="https://facebook.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/fb.png' %}" width="50px"><span class="text-hidden">Facebook</span></a>
+				<a href="https://twitter.com/itboktan/"><img class="link-social" src="{% static 'oktan/img/asset/twitter.png' %}" width="50px"><span class="text-hidden">Twitter</span></a>
+				<a href="https://instagram.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/instagram.png' %}" width="50px"><span class="text-hidden">Instagram</span></a>
+				<a href="https://ask.fm/oktanitb"><img class="link-social" src="{% static 'oktan/img/asset/askfm.png' %}" width="50px"><span class="text-hidden">Askfm</span></a>
+				<a href="https://line.me/"><img class="link-social" src="{% static 'oktan/img/asset/line.png' %}" width="50px"><span class="text-hidden">Line</span></a>
+				<a href="https://youtube.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/youtube.png' %}" width="50px"><span class="text-hidden">Youtube</span></a>
+				<hr class="light">
+			</div>
+        </div>
+        <br>
+        <div class="row">
+        	<div class="col-lg-8 mx-auto text-center">
+        		<p> Copyright &copy; OKTAN ITB 2018</p>
+        	</div>
+      	</div>
+      </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'oktan/js/clean-blog.js' %}"></script>
+    <script src="{% static 'oktan/js/creative.js' %}"></script>
+    <script src="{% static 'oktan/js/timeline.js' %}"></script>
+  </body>
+
+</html>
+{% endblock %}

@@ -64,6 +64,18 @@ def index(request):
     template = 'oktan/index.html'
     return render(request, template)
 
+def about(request):
+    template = 'oktan/about.html'
+    return render(request, template)
+
+def news(request):
+    template = 'oktan/news.html'
+    return render(request, template)
+
+def gallery(request):
+    template = 'oktan/gallery.html'
+    return render(request, template)
+
 def login_page(request):
     template = 'oktan/login.html'
     return render(request, template)
