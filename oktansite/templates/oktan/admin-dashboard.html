@@ -67,6 +67,13 @@
               News</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#about">
+            <i class="fa fa-newspaper-o"></i>
+            <span class="nav-link-text">
+              About Content</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -219,7 +226,7 @@
           Sponsorship
           <div class='btn-toolbar pull-right'>
             <div class='btn-group'>
-              <button type='button' class='btn btn-success'>Add</button>
+              <a href="{% url 'oktansite:addsponsor' %}"><button type='button' class='btn btn-success'>Add</button></a>
             </div>
           </div>
       </div>
@@ -275,7 +282,7 @@
           News
           <div class='btn-toolbar pull-right'>
             <div class='btn-group'>
-              <button type='button' class='btn btn-success'>Add</button>
+              <a href="{% url 'oktansite:addnews' %}"><button type='button' class='btn btn-success'>Add</button></a>
             </div>
           </div>
       </div>
@@ -327,6 +334,21 @@
         Updated yesterday at 11:59 PM
       </div>
     </div>
+
+    <div class="card mb-3" id="about">
+        <div class="card-header">
+            <i class="fa fa-table"></i>
+            About Page Content
+            <div class='btn-toolbar pull-right'>
+              <div class='btn-group'>
+                <a href="{% url 'oktansite:editabout' %}"><button type='button' class='btn btn-success'>Edit</button></a>
+              </div>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">
+          Updated yesterday at 11:59 PM
+        </div>
+      </div>
     <!-- /.container-fluid -->
 
   </div>

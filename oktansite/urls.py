@@ -12,5 +12,8 @@ urlpatterns = [
     url(r'^user/', views.user, name='user'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^loginadmin/', views.login_admin, name="loginadmin"),
+    url(r'^admin/addnews', views.add_news, name="addnews"),
+    url(r'^admin/editabout', views.edit_about, name="editabout"),
+    url(r'^admin/addsponsor', views.add_sponsor, name="addsponsor"),
     url(r'^admin/', views.admin_dashboard, name="admindashboard")
 ]

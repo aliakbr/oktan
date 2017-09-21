@@ -22,6 +22,18 @@ def admin_dashboard(request):
     template = 'oktan/admin-dashboard.html'
     return render(request, template)
 
+def add_news(request):
+    template = 'oktan/addnews.html'
+    return render(request, template)
+
+def edit_about(request):
+    template = 'oktan/editabout.html'
+    return render(request, template)
+
+def add_sponsor(request):
+    template = 'oktan/addsponsor.html'
+    return render(request, template)
+
 @login_required
 def administration(request):
     template = 'oktan/administrasi.html'
