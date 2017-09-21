@@ -1,37 +1,71 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .models import *
 from django.core.exceptions import ValidationError
 
 # Create your views here.
+
+# Admin View
+def login_admin(request):
+    template = 'oktan/login-admin.html'
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('oktansite:admin_dashboard')
+    if request.method == 'GET':
+        return render(request, template)
+    else:
+        email = request.POST['email']
+        password = request.POST['password']
+        acc = authenticate(email=email, password=password)
+        if acc is not None and acc.is_staff:
+            auth_login(request, acc)
+            return redirect('oktansite:admin_dashboard')
+        else:
+            return render(request, template)
+
+def admin_dashboard(request):
+    template = 'oktan/admin-dashboard.html'
+    if request.user.is_staff:
+        return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
+def add_news(request):
+    template = 'oktan/addnews.html'
+    if request.user.is_staff:
+        return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
+def edit_about(request):
+    template = 'oktan/editabout.html'
+    if request.user.is_staff:
+        return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
+def add_sponsor(request):
+    template = 'oktan/addsponsor.html'
+    if request.user.is_staff:
+        return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
+def admin_logout(request):
+    if request.user.is_staff:
+        auth_logout(request)
+        return redirect(reverse('oktansite:index'))
+    else:
+        return redirect('oktansite:index')
+
+# Site View
 def index(request):
     template = 'oktan/index.html'
     return render(request, template)
 
 def login_page(request):
     template = 'oktan/login.html'
-    return render(request, template)
-
-def login_admin(request):
-    template = 'oktan/login-admin.html'
-    return render(request, template)
-
-def admin_dashboard(request):
-    template = 'oktan/admin-dashboard.html'
-    return render(request, template)
-
-def add_news(request):
-    template = 'oktan/addnews.html'
-    return render(request, template)
-
-def edit_about(request):
-    template = 'oktan/editabout.html'
-    return render(request, template)
-
-def add_sponsor(request):
-    template = 'oktan/addsponsor.html'
     return render(request, template)
 
 @login_required
