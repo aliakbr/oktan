@@ -50,7 +50,13 @@ def add_news(request):
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:
-        return render(request, template)
+        if request.method == "POST":
+            about = About.objects.get(pk=1)
+            about.text = request.POST['text']
+            about.save()
+            return redirect('oktansite:index')
+        else:
+            return render(request, template)
     else:
         return redirect('oktansite:index')
 
@@ -80,7 +86,7 @@ def about(request):
 def news(request):
     template = 'oktan/news.html'
     articles = []
-    news_list = News.objects.order_by("pub_date")
+    news_list = News.objects.order_by("-pub_date")
     count = 0
     for news in news_list:
         articles.append(news)

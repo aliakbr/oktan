@@ -91,10 +91,11 @@
   <div class="content-wrapper py-3">
     <div class="container-fluid" id="admin-content">
       <h3>Edit About Page</h3>
-      <form action="#" method="POST">
+      <form action="{% url 'oktansite:editabout' %}" method="POST">
+        {% csrf_token %}
         <div class="form-group">
             <label for="editor">Deskripsi<span class="req">*</span>:</label>
-            <textarea name="" id="editor">Masukan deskripsi</textarea>
+            <textarea name="text" id="editor">Masukan deskripsi</textarea>
         </div>
         <button class="btn btn-primary" style="text-align:center;">Ubah</button>
     </form>
@@ -143,7 +144,7 @@
 
   <script>
     CKEDITOR.replace('editor');
-    CKEDITOR.config.height = '24em';  
+    CKEDITOR.config.height = '24em';
   </script>
 
 </body>
