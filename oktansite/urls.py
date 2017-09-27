@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^admin_dashboard/editabout', views.edit_about, name="editabout"),
     url(r'^admin_dashboard/addsponsor', views.add_sponsor, name="addsponsor"),
     url(r'^admin_dashboard/', views.admin_dashboard, name="admin_dashboard"),
-    url(r'^admin_logout/', views.admin_logout, name="admin_logout")
+    url(r'^admin_logout/', views.admin_logout, name="admin_logout"),
+    url(r'^editnews/(?P<id>\d+)/', views.edit_news, name="edit_news"),
 ]

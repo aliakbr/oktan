@@ -49,6 +49,20 @@ def add_news(request):
     else:
         return redirect('oktansite:index')
 
+def edit_news(request, id):
+    template = 'oktan/edit_news.html'
+    news = News.objects.get(pk=id)
+    if request.user.is_staff:
+        if request.method == "POST":
+            news.title = request.POST['title']
+            news.text = request.POST['body']
+            news.save()
+            return redirect('oktansite:news')
+        else:
+            return render(request, template, {'news': news})
+    else:
+        return redirect('oktansite:index')
+
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:

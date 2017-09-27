@@ -305,10 +305,10 @@
                     <td>{{ news.pub_date }}</td>
                     <td>{{ news.title }}</td>
                     <th>
-                      <button type="button" class="btn btn-primary">Edit</button>
+                      <a href="{% url 'oktansite:edit_news' news.id %}" class="btn btn-primary">Edit</button>
                     </th>
                     <th>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <a href="#" class="btn btn-danger">Delete</button>
                     </th>
                 </tr>
               {% endfor %}
