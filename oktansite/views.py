@@ -29,7 +29,12 @@ def admin_dashboard(request):
     if request.user.is_staff:
         list_peserta = Team.objects.all()
         list_news = News.objects.all()
-        return render(request, template,{'list_peserta': list_peserta, 'list_news': list_news})
+        timeline = Timeline.objects.all()
+        return render(request, template,{
+            'list_peserta': list_peserta,
+            'list_news': list_news,
+            'timeline': timeline,
+            })
     else:
         return redirect('oktansite:index')
 
@@ -95,6 +100,30 @@ def add_timeline(request):
             return redirect('oktansite:index')
         else:
             return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
+def edit_timeline(request, id):
+    template = 'oktan/edit_timeline.html'
+    timeline = Timeline.objects.get(pk=id)
+    if request.user.is_staff:
+        if request.method == "POST":
+            timeline.tanggal = request.POST['tanggal']
+            timeline.text = request.POST['body']
+            timeline.save()
+            return redirect('oktansite:index')
+        else:
+            return render(request, template, {
+                'timeline': timeline,
+            })
+    else:
+        return redirect('oktansite:index')
+
+def delete_timeline(request, id):
+    if request.user.is_staff:
+        timeline = Timeline.objects.get(pk=id)
+        timeline.delete()
+        return redirect('oktansite:index')
     else:
         return redirect('oktansite:index')
 

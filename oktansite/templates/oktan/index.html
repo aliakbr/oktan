@@ -108,37 +108,36 @@
       <div class="container">
         <div class="row">
           <ul class="timeline">
-            {% with False as genap %}
-              {% for date in timeline %}
-                {% if genap is not True %}
-                   <li>
-                     <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
-                     <div class="timeline-panel">
-                       <div class="timeline-heading">
-                         <h4 class="timeline-title">{{ date.tanggal }}</h4>
-                       </div>
-                       <div class="timeline-body">
-                         {{ date.text | safe }}
-                       </div>
+            {% assign genap False %}
+            {% for date in timeline %}
+              {% if genap is not True %}
+                 <li>
+                   <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+                   <div class="timeline-panel">
+                     <div class="timeline-heading">
+                       <h4 class="timeline-title">{{ date.tanggal }}</h4>
                      </div>
-                     {% block A %}{% assign genap True %}{% endblock %}
-                   </li>
-                 {% else %}
-                   <li class="timeline-inverted">
-                     <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-                     <div class="timeline-panel">
-                       <div class="timeline-heading">
-                         <h4 class="timeline-title">{{ date.tanggal }}</h4>
-                       </div>
-                       <div class="timeline-body">
-                         {{ date.text | safe }}
-                       </div>
+                     <div class="timeline-body">
+                       {{ date.text | safe }}
                      </div>
-                     {% block B%}{% assign genap False %}{% endblock %}
-                   </li>
-               {% endif %}
-             {% endfor %}
-           {% endwith %}
+                   </div>
+                   {% assign genap True %}
+                 </li>
+               {% else %}
+                 <li class="timeline-inverted">
+                   <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+                   <div class="timeline-panel">
+                     <div class="timeline-heading">
+                       <h4 class="timeline-title">{{ date.tanggal }}</h4>
+                     </div>
+                     <div class="timeline-body">
+                       {{ date.text | safe }}
+                     </div>
+                   </div>
+                   {% assign genap False %}
+                 </li>
+             {% endif %}
+           {% endfor %}
          </ul>
         </div>
       </div>
