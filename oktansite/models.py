@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from datetime import datetime
 
 def get_upload_path_images_payment(instance, filename):
     """
@@ -82,16 +83,16 @@ class Team(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     team_name = models.CharField(max_length=50, null=False, unique=True)
-    supervisor_name = models.CharField(max_length=50, null=False)
+    supervisor_name = models.CharField(max_length=100, null=False)
     school_name = models.CharField(max_length=150, null=False)
     proof_of_payment = models.FileField(upload_to=get_upload_path_images_payment)
-    student_name_1 = models.CharField(max_length=50, null=True)
+    student_name_1 = models.CharField(max_length=100, null=True)
     student_phone_number_1 = models.CharField(max_length=50, null=True)
-    student_id_number_1 = models.CharField(max_length=50, null=True)
+    student_id_number_1 = models.CharField(max_length=100, null=True)
     student_card_image_1 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
-    student_name_2 = models.CharField(max_length=50, null=True)
+    student_name_2 = models.CharField(max_length=100, null=True)
     student_phone_number_2 = models.CharField(max_length=50, null=True)
-    student_id_number_2 = models.CharField(max_length=50, null=True)
+    student_id_number_2 = models.CharField(max_length=100, null=True)
     student_card_image_2 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
     def __str__(self):
         return self.team_name
@@ -149,3 +150,11 @@ class Gallery(models.Model):
     image_file = models.FileField(upload_to=get_upload_path_images_gallery)
     def __str__(self):
         return self.image_file
+
+class News(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=120)
+    text = models.TextField()
+    pub_date = models.DateTimeField(default=datetime.now, blank=True)
+    def __str__(self):
+        return self.id

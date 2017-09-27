@@ -34,7 +34,16 @@ def admin_dashboard(request):
 def add_news(request):
     template = 'oktan/addnews.html'
     if request.user.is_staff:
-        return render(request, template)
+        if request.method == "POST":
+            title = request.POST['title']
+            body = request.POST['body']
+            article = News()
+            article.title = title
+            article.text = body
+            article.save()
+            return redirect('oktansite:news')
+        else:
+            return render(request, template)
     else:
         return redirect('oktansite:index')
 
@@ -70,7 +79,15 @@ def about(request):
 
 def news(request):
     template = 'oktan/news.html'
-    return render(request, template)
+    articles = []
+    news_list = News.objects.order_by("pub_date")
+    count = 0
+    for news in news_list:
+        articles.append(news)
+        count += 1
+        if count == 5:
+            break
+    return render(request, template, {'news': articles})
 
 def gallery(request):
     template = 'oktan/gallery.html'

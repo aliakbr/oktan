@@ -85,56 +85,23 @@
                 <hr class="primary">
             </div>
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-preview">
-                    <a href="post.html">
-                    <h2 class="post-title">
-                        Man must explore, and this is exploration at its greatest
-                    </h2>
-                    </a>
-                    <p class="post-subtitle">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et mattis tellus. Curabitur dapibus magna non nunc vestibulum lobortis. Mauris et tristique nisl. Nullam condimentum et erat ac elementum. Suspendisse id sem porttitor, pharetra nunc in, faucibus metus. Suspendisse ultrices velit sit amet neque luctus, ac eleifend mi pretium. Fusce consequat metus sed tellus tempus, at accumsan nisi euismod. Aliquam cursus et nibh sed accumsan. Quisque posuere elit elit. In a dolor turpis. Maecenas blandit, nibh vel tincidunt vehicula, libero lectus semper tortor, quis gravida elit augue at dolor. Donec elementum ipsum urna, sed luctus tortor iaculis in. Nunc ut.
-                    </p>
-                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
-                    <p class="post-meta">Posted by
-                    <a href="#">Admin Oktan</a>
-                    on September 24, 2017</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                    <h2 class="post-title">
-                        Science has not yet mastered prophecy
-                    </h2>
-                    </a>
-                    <p class="post-subtitle">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sollicitudin eros sed leo consectetur, quis euismod sapien ultricies. Praesent feugiat at nisl nec tincidunt. Nulla molestie magna sit amet tortor ullamcorper blandit. Nullam vitae consequat ligula. Proin eu felis nec nisl rhoncus pellentesque. Phasellus laoreet ultricies lacus sit amet scelerisque. Sed feugiat fermentum lacus a placerat. In hac habitasse platea dictumst. Mauris consequat odio eget est lobortis, eu interdum metus finibus. Donec interdum lobortis lacus, at faucibus massa efficitur vel.
-                    </p>
-                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">daftarpeserta.pdf</a></p>
-                    <p class="post-meta">Posted by
-                    <a href="#">Admin Oktan</a>
-                    on August 24, 2017</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                    <h2 class="post-title">
-                        Failure is not an option
-                    </h2>
-                    </a>
-                    <p class="post-subtitle">
-                        Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                    </p>
-                    <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
-                    <p class="post-meta">Posted by
-                    <a href="#">Admin Oktan</a>
-                    on July 8, 2017</p>
-                </div>
-                <hr>
-                <!-- Pager -->
-                <div class="clearfix">
-                    <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
-                </div>
-            </div>      
+              {% for article in news %}
+                  <div class="post-preview">
+                      <a href="post.html">
+                      <h2 class="post-title">
+                          {{ article.title }}
+                      </h2>
+                      </a>
+                      <p class="post-subtitle">
+                          {{ article.text | safe }}
+                      </p>
+                      <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
+                      <p class="post-meta">Posted by
+                      <a href="#">Admin Oktan</a>
+                      on {{ article.pub_date }}</p>
+                  </div>
+              {% endfor %}
+            </div>
         </div>
       </div>
     </section>
