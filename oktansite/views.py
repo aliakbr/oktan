@@ -27,7 +27,9 @@ def login_admin(request):
 def admin_dashboard(request):
     template = 'oktan/admin-dashboard.html'
     if request.user.is_staff:
-        return render(request, template)
+        list_peserta = Team.objects.all()
+        list_news = News.objects.all()
+        return render(request, template,{'list_peserta': list_peserta, 'list_news': list_news})
     else:
         return redirect('oktansite:index')
 

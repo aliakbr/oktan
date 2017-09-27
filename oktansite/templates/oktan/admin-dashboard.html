@@ -236,7 +236,7 @@
           <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
             <thead>
               <tr>
-                <th>Nama</th>
+                <th>Nama Tim</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -249,24 +249,17 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <td>A</td>
-                <th>
-                  <button type="button" class="btn btn-primary">Edit</button>
-                </th>
-                <th>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </th>
-              </tr>
-              <tr>
-                <td>B</td>
-                <th>
-                  <button type="button" class="btn btn-primary">Edit</button>
-                </th>
-                <th>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </th>
-              </tr>
+              {% for peserta in list_peserta %}
+                <tr>
+                  <td>{{peserta.team_name}}</td>
+                  <th>
+                    <button type="button" class="btn btn-primary">Edit</button>
+                  </th>
+                  <th>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                  </th>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -307,26 +300,18 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <td>2017-08-01</td>
-                <td>A</td>
-                <th>
-                  <button type="button" class="btn btn-primary">Edit</button>
-                </th>
-                <th>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </th>
-              </tr>
-              <tr>
-                <td>2017-08-01</td>
-                <td>B</td>
-                <th>
-                  <button type="button" class="btn btn-primary">Edit</button>
-                </th>
-                <th>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </th>
-              </tr>
+              {% for news in list_news %}
+                <tr>
+                    <td>{{ news.pub_date }}</td>
+                    <td>{{ news.title }}</td>
+                    <th>
+                      <button type="button" class="btn btn-primary">Edit</button>
+                    </th>
+                    <th>
+                      <button type="button" class="btn btn-danger">Delete</button>
+                    </th>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
