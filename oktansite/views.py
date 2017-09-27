@@ -84,6 +84,20 @@ def edit_about(request):
     else:
         return redirect('oktansite:index')
 
+def add_timeline(request):
+    template = 'oktan/add_timeline.html'
+    if request.user.is_staff:
+        if request.method == "POST":
+            timeline = Timeline()
+            timeline.tanggal = request.POST['tanggal']
+            timeline.text = request.POST['body']
+            timeline.save()
+            return redirect('oktansite:index')
+        else:
+            return render(request, template)
+    else:
+        return redirect('oktansite:index')
+
 def add_sponsor(request):
     template = 'oktan/addsponsor.html'
     if request.user.is_staff:
@@ -100,8 +114,11 @@ def admin_logout(request):
 
 # Site View
 def index(request):
+    timeline = Timeline.objects.all()
     template = 'oktan/index.html'
-    return render(request, template)
+    return render(request, template, {
+        'timeline': timeline
+    })
 
 def about(request):
     template = 'oktan/about.html'

@@ -162,3 +162,8 @@ class News(models.Model):
 class About(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField()
+
+class Timeline(models.Model):
+    id = models.AutoField(primary_key=True)
+    tanggal = models.CharField(max_length=120)
+    text = models.TextField()
