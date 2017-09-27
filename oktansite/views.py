@@ -63,6 +63,14 @@ def edit_news(request, id):
     else:
         return redirect('oktansite:index')
 
+def delete_news(request, id):
+    if request.user.is_staff:
+        news = News.objects.get(pk=id)
+        news.delete()
+        return redirect('oktansite:news')
+    else:
+        return redirect('oktansite:index')
+
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:

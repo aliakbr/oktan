@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin_dashboard/', views.admin_dashboard, name="admin_dashboard"),
     url(r'^admin_logout/', views.admin_logout, name="admin_logout"),
     url(r'^editnews/(?P<id>\d+)/', views.edit_news, name="edit_news"),
+    url(r'^deletenews/(?P<id>\d+)/', views.delete_news, name="delete_news")
 ]

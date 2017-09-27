@@ -308,7 +308,7 @@
                       <a href="{% url 'oktansite:edit_news' news.id %}" class="btn btn-primary">Edit</button>
                     </th>
                     <th>
-                      <a href="#" class="btn btn-danger">Delete</button>
+                      <a href="{% url 'oktansite:delete_news' news.id %}" class="btn btn-danger">Delete</button>
                     </th>
                 </tr>
               {% endfor %}
