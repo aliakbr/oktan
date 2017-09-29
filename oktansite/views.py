@@ -165,6 +165,10 @@ def news(request):
             break
     return render(request, template, {'news': articles})
 
+def post(request):
+    template = 'oktan/post.html'
+    return render(request, template)
+
 def gallery(request):
     template = 'oktan/gallery.html'
     return render(request, template)

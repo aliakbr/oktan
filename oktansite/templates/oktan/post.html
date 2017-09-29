@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
+    <title>Oktan ITB 2018</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'oktan/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'oktan/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'oktan/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'oktan/css/clean-blog.css' %}" rel="stylesheet">
+    <link href="{% static 'oktan/css/creative.css' %}" rel="stylesheet">
+
+    <style>
+    blockquote {
+        font-style: italic;
+        color: #777777; 
+    }
+
+    form {
+        max-width: 600px;
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    input, textarea {
+        border:0; outline:0;
+        padding: 0.7em;
+        display: block;
+        width: 100%;
+        margin-top: 1em;
+        font-family: 'Merriweather', sans-serif;
+        box-shadow: 0 1px 1px rgba(black, 0.1);
+        resize: none;
+        border-radius: 5px;
+    }
+            
+    input:focus, textarea:focus {
+        box-shadow: 0 0px 2px rgba(#dd8d6c, 1)!important;
+    }
+    
+    #input-submit {
+        color: white; 
+        background: #dd8d6c;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #input-submit:hover {
+        background: #da8360;
+        box-shadow: 0 1px 1px 1px rgba(#aaa, 0.6); 
+    }
+    
+    textarea {
+        height: 150px;
+    }
+
+    /* Clearfix */
+    .cf:before,
+    .cf:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    .cf:after {
+        clear: both;
+    }
+    </style>
+  </head>
+
+  <body id="news">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <a class="navbar-brand" href="{% url 'oktansite:index' %}">
+        <img class="navbar-brand" src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></img>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#news">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'oktansite:gallery' %}">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'oktansite:user' %}">Halo, {{ user.team.team_name }}</a>
+            </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'oktansite:login' %}">Login/Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead">
+      <div class="header-content">
+      </div>
+    </header>
+
+    <section class="bg-secondary" style="padding-top: 30px;">
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto text-center">
+                <div class="post-heading">
+                    <h1>Man must explore, and this is exploration at its greatest</h1>
+                    <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                    <span class="meta">Posted by
+                      <a href="#">Start Bootstrap</a>
+                      on August 24, 2017</span>
+                  </div>
+            </div>
+              <!-- Post Content -->
+              <article style="padding-top:30px;">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                      <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
+          
+                      <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
+          
+                      <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
+          
+                      <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
+          
+                      <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>
+          
+                      <h2 class="section-heading">The Final Frontier</h2>
+          
+                      <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
+          
+                      <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
+          
+                      <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
+          
+                      <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
+          
+                      <h2 class="section-heading">Reaching for the Stars</h2>
+          
+                      <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
+          
+                      <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
+          
+                      <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
+          
+                      <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
+          
+                      <p>Placeholder text by
+                        <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
+                        <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <hr>
+              <div class="col-lg-8 col-md-10 mx-auto text-center" style="margin-top: 30px;">
+                <h3>Comment</h3>
+                <form class="cf">
+                  <div >
+                    <input type="text" id="input-name" placeholder="Name">
+                    <input type="email" id="input-email" placeholder="Email address">
+                    <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+                  </div>  
+                  <input type="submit" value="Submit" id="input-submit">
+                </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Penyelenggara</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/penyelenggara.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Sponsor</h2>
+            <hr class="light">
+          	<div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/sponsor.png' %}">
+          	</div>
+          </div>
+          <div class="col-lg-4 text-center">
+          	<h2 class="section-heading text-white">Media Partner</h2>
+            <hr class="light">
+            <div class="thumbnail">
+          		<img style="width: 95%; max-width: 350px" src="{% static 'oktan/img/asset/media-partner.png' %}">
+          	</div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+			<div class=" col-lg-8 mx-auto text-center">
+				<a href="https://facebook.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/fb.png' %}" width="50px"><span class="text-hidden">Facebook</span></a>
+				<a href="https://twitter.com/itboktan/"><img class="link-social" src="{% static 'oktan/img/asset/twitter.png' %}" width="50px"><span class="text-hidden">Twitter</span></a>
+				<a href="https://instagram.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/instagram.png' %}" width="50px"><span class="text-hidden">Instagram</span></a>
+				<a href="https://ask.fm/oktanitb"><img class="link-social" src="{% static 'oktan/img/asset/askfm.png' %}" width="50px"><span class="text-hidden">Askfm</span></a>
+				<a href="https://line.me/"><img class="link-social" src="{% static 'oktan/img/asset/line.png' %}" width="50px"><span class="text-hidden">Line</span></a>
+				<a href="https://youtube.com/oktanitb/"><img class="link-social" src="{% static 'oktan/img/asset/youtube.png' %}" width="50px"><span class="text-hidden">Youtube</span></a>
+				<hr class="light">
+			</div>
+        </div>
+        <br>
+        <div class="row">
+        	<div class="col-lg-8 mx-auto text-center">
+        		<p> Copyright &copy; OKTAN ITB 2018</p>
+        	</div>
+      	</div>
+      </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'oktan/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'oktan/js/clean-blog.js' %}"></script>
+    <script src="{% static 'oktan/js/creative.js' %}"></script>
+    <script src="{% static 'oktan/js/timeline.js' %}"></script>
+  </body>
+
+</html>
+{% endblock %}
