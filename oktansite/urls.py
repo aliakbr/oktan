@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^news/', views.news, name="news"),
     url(r'^post/', views.post, name="post"),
     url(r'^gallery/', views.gallery, name="gallery"),
+    url(r'^contact/', views.contact, name="contact"),
     url(r'^login/', views.login, name='login'),
     url(r'^register/', views.register, name='register'),
     url(r'^logout/', views.logout, name='logout'),

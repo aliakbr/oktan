@@ -173,6 +173,10 @@ def gallery(request):
     template = 'oktan/gallery.html'
     return render(request, template)
 
+def contact(request):
+    template = 'oktan/contact.html'
+    return render(request, template)
+
 def login_page(request):
     template = 'oktan/login.html'
     return render(request, template)

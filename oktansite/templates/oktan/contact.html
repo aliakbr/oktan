@@ -17,6 +17,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'oktan/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
@@ -24,13 +25,15 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
 
     <!-- Plugin CSS -->
-    <link href="{% static 'oktan/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="{% static 'oktan/css/clean-blog.css' %}" rel="stylesheet">
     <link href="{% static 'oktan/css/creative.css' %}" rel="stylesheet">
+
   </head>
 
-  <body id="about">
+  <body id="contact">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -43,7 +46,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link active" href="#about">About</a>
+                <a class="nav-link" href="{% url 'oktansite:about' %}">About</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'oktansite:news' %}">News</a>
@@ -52,7 +55,7 @@
                 <a class="nav-link" href="{% url 'oktansite:gallery' %}">Gallery</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'oktansite:contact' %}">Contact</a>
+                <a class="nav-link active" href="#contact">Contact</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -75,40 +78,33 @@
     </header>
 
     <section class="bg-secondary">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <img class="img-responsive" style="width: 250px; padding: 0 5px; padding-bottom: 10px;" src="{% static 'oktan/img/asset/logo.png' %}" alt="Logo Oktan">
-            <h5 class="section-heading">Logo Oktan</h5>
-            <hr class="primary">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 mx-auto text-center">
+              <h2 class="section-heading">Hubungi Kami</h2>
+              <hr class="primary">
+            </div>
           </div>
-          <div class="col-lg-12 text-center">
-            <p>
-                <strong>"OKTAN"</strong> atau <strong> Olimpiade Kimia Tingkat Nasional</strong> adalah acara yang digagas dan diselenggarakan oleh Himpunan Mahasiswa Kimia 'AMISCA' ITB pada tahun 2017.
-                Olimpiade ini diselenggarakan untuk pelajar tingkat SMA/SMU/SMK sederajat. OKTAN ITB 2017 ini diselenggarakan untuk yang keempat kalinya oleh HMK ‘AMISCA’ ITB.
-                Kompetisi ini diharapkan dapat mendukung proses pembelajaran ilmu kimia terhadap para siswa dan siswi serta dapat melihat keberterimaan materi yang telah diberikan di setiap sekolah.
-            </p>
+          <div class="row">
+            <div class="col-lg-3 ml-auto text-center">
+              <i class="fa fa-phone fa-3x sr-contact"></i>
+              <p>Nadya Nur Pasha<br>089536568415</p>  
+              <p>Anisa Nur Arifa<br>085713741303</p>
+            </div>
+            <div class="col-lg-3 mx-auto text-center">
+                <img style="width: 4em; margin: 3px;" src="{% static 'oktan/img/asset/contact_line.png' %}">
+                <p>Nadya Nur Pasha<br>ID Line: nadyanpasha</p>
+                <p>Anisa Nur Arifa<br>ID Line: anisanurarifa</p>
+            </div>
+            <div class="col-lg-3 mr-auto text-center">
+              <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+              <p>
+                <a href="mailto:oktanitb2018@gmail.com" style="color: black">oktanitb2018@gmail.com</a>
+              </p>
+            </div>
           </div>
-          <div class="col-lg-12 text-center">
-                <p>
-                        <strong>Olimpiade Kimia</strong> <br>
-                        Olimpiade ini digunakan sebagai ajang kompetisi dalam bidang kimia untuk pelajar SMA/sederajat. 
-                        Terdiri dari babak penyisihan yang diadakan pada bulan Januari 2016 di 21 subrayon se-Indonesia. 
-                        Peserta yang berhasil melalui tahap penyisihan akan diundang ke Bandung sebagai semifinalis OKTAN ITB 2016.
-                </p>
-          </div>
-          <br>
-          <div class="col-lg-12 text-center" style="margin-top: 30px;">
-                <h5>Perkenalan Singkat Panitia</h5>
-                <img src="{% static 'oktan/img/asset/organigram.jpg' %}" alt="Organigram Panitia">
-          </div>
-          <div class="col-lg-12 text-center" style="margin-top: 30px;">
-                <h5>Subrayon OKTAN ITB 2018</h5>
-                <img src="{% static 'oktan/img/asset/subrayon.png' %}" alt="Organigram Panitia">
-          </div>      
         </div>
-      </div>
-    </section>
+      </section>
 
     <section class="bg-dark">
       <div class="container">
@@ -164,9 +160,10 @@
     <!-- Plugin JavaScript -->
     <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
     <script src="{% static 'oktan/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-    <script src="{% static 'oktan/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
     <!-- Custom scripts for this template -->
+    <script src="{% static 'oktan/js/clean-blog.js' %}"></script>
     <script src="{% static 'oktan/js/creative.js' %}"></script>
     <script src="{% static 'oktan/js/timeline.js' %}"></script>
   </body>
