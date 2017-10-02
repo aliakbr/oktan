@@ -49,6 +49,12 @@ def get_upload_path_images_student_card2(instance, filename):
     print(upload_dir)
     return os.path.join(upload_dir, filename)
 
+def get_upload_path_images_sponsor(instance, filename):
+    upload_dir = "sponsor"
+    extension = os.path.splitext(filename)[1]
+    filename = "sponsor"+extension
+    return os.path.join(upload_dir, filename)
+
 def get_upload_path_image_sponsor(instance, filename):
     upload_dir = "sponsor"
     extension = os.path.splitext(filename)[1]
@@ -62,18 +68,13 @@ def get_upload_path_images_gallery(instance, filename):
     upload_dir = "gallery"
     return os.path.join(upload_dir, filename)
 
-def get_upload_path_images_sponsor(instance, filename):
-    """
-        Function to get upload image gallery dir path
-    """
-    upload_dir = "sponsor"
-    return os.path.join(upload_dir, filename)
-
 def get_upload_path_images_media_partner(instance, filename):
     """
         Function to get upload image gallery dir path
     """
     upload_dir = "mediaPartner"
+    extension = os.path.splitext(filename)[1]
+    filename = "mediaPartner"+extension
     return os.path.join(upload_dir, filename)
 
 # Create your models here.
@@ -190,15 +191,15 @@ class PhotoGallery(models.Model):
     id = models.AutoField(primary_key=True)
     src = models.ImageField(upload_to=get_upload_path_images_gallery)
     def __str__(self):
-        return self.image_file
+        return self.src
+
     def save(self, *args,**kwargs):
-        self.validate_unique()
         try:
-            this = Gallery.objects.get(id=self.id)
+            this = PhotoGallery.objects.get(id=self.id)
             if this.src != self.src:
                 this.src.delete(save=False)
         except: pass # when new photo then we do nothing, normal case
-        super(Sponsor,self).save(*args, **kwargs)
+        super(PhotoGallery,self).save(*args, **kwargs)
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
@@ -221,11 +222,11 @@ class Sponsor(models.Model):
     id = models.AutoField(primary_key=True)
     src = models.ImageField(upload_to=get_upload_path_images_sponsor)
     def __str__(self):
-        return self.image_file
+        return self.id
+
     def save(self, *args,**kwargs):
-        self.validate_unique()
         try:
-            this = Gallery.objects.get(id=self.id)
+            this = Sponsor.objects.get(id=self.id)
             if this.src != self.src:
                 this.src.delete(save=False)
         except: pass # when new photo then we do nothing, normal case
@@ -235,12 +236,12 @@ class MediaPartner(models.Model):
     id = models.AutoField(primary_key=True)
     src = models.ImageField(upload_to=get_upload_path_images_media_partner)
     def __str__(self):
-        return self.image_file
+        return self.src
+
     def save(self, *args,**kwargs):
-        self.validate_unique()
         try:
-            this = Gallery.objects.get(id=self.id)
+            this = MediaPartner.objects.get(id=self.id)
             if this.src != self.src:
                 this.src.delete(save=False)
         except: pass # when new photo then we do nothing, normal case
-        super(Media,self).save(*args, **kwargs)
+        super(MediaPartner,self).save(*args, **kwargs)

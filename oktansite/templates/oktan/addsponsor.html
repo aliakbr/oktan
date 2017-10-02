@@ -98,15 +98,13 @@
   <div class="content-wrapper py-3">
     <div class="container-fluid" id="admin-content">
       <h3>Add Sponsor Form</h3>
-      <form action="#" enctype="multipart/form-data" method="POST">
-        <div class="form-group">
-            <label for="judul">Nama Sponsor<span class="req">*</span>:</label>
-            <input type="text" class="form-control" id="judul" placeholder="Enter Title" name="" required>
-        </div>
+      <form action="{% url 'oktansite:addsponsor' %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
         <div class="form-group">
             <b>Select image to upload<span class="req">*</span>:</b>
             <br>
-            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="file" name="sponsor" id="fileToUpload" required>
+            <img src="{{ sponsor.src.url }}"></img>
         </div>
         <button class="btn btn-primary" style="text-align:center;">Upload</button>
     </form>

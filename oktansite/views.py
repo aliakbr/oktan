@@ -76,13 +76,38 @@ def delete_news(request, id):
     else:
         return redirect('oktansite:index')
 
+def add_sponsor(request):
+    template = 'oktan/addsponsor.html'
+    sponsor = Sponsor.objects.first()
+    if request.user.is_staff:
+        if request.method == "POST":
+            if sponsor:
+                sponsor.src = request.FILES['sponsor']
+                sponsor.save()
+            else:
+                sponsor = Sponsor()
+                sponsor.src = request.FILES['sponsor']
+                sponsor.save()
+            return redirect('oktansite:addsponsor')
+        else:
+            return render(request, template, {
+                'sponsor': sponsor,
+            })
+    else:
+        return redirect('oktansite:index')
+
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:
         if request.method == "POST":
-            about = About.objects.get(pk=1)
-            about.text = request.POST['text']
-            about.save()
+            about = About.objects.first()
+            if (about):
+                about.text = request.POST['text']
+                about.save()
+            else:
+                about = About()
+                about.text = request.POST['text']
+                about.save()
             return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template)
@@ -127,13 +152,6 @@ def delete_timeline(request, id):
     else:
         return redirect('oktansite:index')
 
-def add_sponsor(request):
-    template = 'oktan/addsponsor.html'
-    if request.user.is_staff:
-        return render(request, template)
-    else:
-        return redirect('oktansite:index')
-
 def admin_logout(request):
     if request.user.is_staff:
         auth_logout(request)
@@ -142,11 +160,16 @@ def admin_logout(request):
         return redirect('oktansite:index')
 
 # Site View
+
 def index(request):
     timeline = Timeline.objects.all()
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     template = 'oktan/index.html'
     return render(request, template, {
-        'timeline': timeline
+        'timeline': timeline,
+        'sponsor': sponsor,
+        'media_partner': media_partner
     })
 
 def about(request):
