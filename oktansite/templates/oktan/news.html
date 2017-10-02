@@ -87,15 +87,14 @@
             <div class="col-lg-8 col-md-10 mx-auto">
               {% for article in news %}
                   <div class="post-preview">
-                      <a href="post.html">
-                      <h2 class="post-title">
-                          {{ article.title }}
-                      </h2>
+                      <a href="{% url 'oktansite:blog' article.id %}">
+                        <h2 class="post-title">
+                            {{ article.title }}
+                        </h2>
                       </a>
                       <p class="post-subtitle">
                           {{ article.text | safe }}
                       </p>
-                      <p class="post-subtitle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <a href="#">peraturan_oktan.pdf</a></p>
                       <p class="post-meta">Posted by
                       <a href="#">Admin Oktan</a>
                       on {{ article.pub_date }}</p>

@@ -48,7 +48,7 @@ def add_news(request):
             article.title = title
             article.text = body
             article.save()
-            return redirect('oktansite:news')
+            return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template)
     else:
@@ -62,7 +62,7 @@ def edit_news(request, id):
             news.title = request.POST['title']
             news.text = request.POST['body']
             news.save()
-            return redirect('oktansite:news')
+            return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template, {'news': news})
     else:
@@ -72,7 +72,7 @@ def delete_news(request, id):
     if request.user.is_staff:
         news = News.objects.get(pk=id)
         news.delete()
-        return redirect('oktansite:news')
+        return redirect('oktansite:admin_dashboard')
     else:
         return redirect('oktansite:index')
 
@@ -83,7 +83,7 @@ def edit_about(request):
             about = About.objects.get(pk=1)
             about.text = request.POST['text']
             about.save()
-            return redirect('oktansite:index')
+            return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template)
     else:
@@ -97,7 +97,7 @@ def add_timeline(request):
             timeline.tanggal = request.POST['tanggal']
             timeline.text = request.POST['body']
             timeline.save()
-            return redirect('oktansite:index')
+            return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template)
     else:
@@ -111,7 +111,7 @@ def edit_timeline(request, id):
             timeline.tanggal = request.POST['tanggal']
             timeline.text = request.POST['body']
             timeline.save()
-            return redirect('oktansite:index')
+            return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template, {
                 'timeline': timeline,
@@ -123,7 +123,7 @@ def delete_timeline(request, id):
     if request.user.is_staff:
         timeline = Timeline.objects.get(pk=id)
         timeline.delete()
-        return redirect('oktansite:index')
+        return redirect('oktansite:admin_dashboard')
     else:
         return redirect('oktansite:index')
 
@@ -164,6 +164,11 @@ def news(request):
         if count == 5:
             break
     return render(request, template, {'news': articles})
+
+def blog(request, id):
+    template = 'oktan/post.html'
+    article = News.objects.get(pk = id)
+    return render(request, template, {'article' : article})
 
 def post(request):
     template = 'oktan/post.html'

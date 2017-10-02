@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name="about"),
     url(r'^news/', views.news, name="news"),
+    url(r'^blog/(?P<id>\d+)/', views.blog, name="blog"),
     url(r'^post/', views.post, name="post"),
     url(r'^gallery/', views.gallery, name="gallery"),
     url(r'^contact/', views.contact, name="contact"),
