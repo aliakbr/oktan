@@ -96,6 +96,26 @@ def add_sponsor(request):
     else:
         return redirect('oktansite:index')
 
+def add_media(request):
+    template = 'oktan/addmedia.html'
+    media = MediaPartner.objects.first()
+    if request.user.is_staff:
+        if request.method == "POST":
+            if media:
+                media.src = request.FILES['media']
+                media.save()
+            else:
+                media= MediaPartner()
+                media.src = request.FILES['media']
+                media.save()
+            return redirect('oktansite:add_media')
+        else:
+            return render(request, template, {
+                'media': media,
+            })
+    else:
+        return redirect('oktansite:index')
+
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:
