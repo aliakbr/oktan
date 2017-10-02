@@ -45,7 +45,7 @@ def get_upload_path_images_student_card2(instance, filename):
     """
     upload_dir = "%s" % instance.team_name
     extension = os.path.splitext(filename)[1]
-    filename = "student_id_1" + extension
+    filename = "student_id_2" + extension
     print(upload_dir)
     return os.path.join(upload_dir, filename)
 
@@ -59,10 +59,21 @@ def get_upload_path_images_gallery(instance, filename):
     """
         Function to get upload image gallery dir path
     """
-    upload_dir = os.path.join('media', 'gallery')
-    print(upload_dir)
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
+    upload_dir = "gallery"
+    return os.path.join(upload_dir, filename)
+
+def get_upload_path_images_sponsor(instance, filename):
+    """
+        Function to get upload image gallery dir path
+    """
+    upload_dir = "sponsor"
+    return os.path.join(upload_dir, filename)
+
+def get_upload_path_images_media_partner(instance, filename):
+    """
+        Function to get upload image gallery dir path
+    """
+    upload_dir = "mediaPartner"
     return os.path.join(upload_dir, filename)
 
 # Create your models here.
@@ -175,13 +186,19 @@ class Account(AbstractBaseUser):
         self.validate_unique()
         super(Account,self).save(*args, **kwargs)
 
-class Gallery(models.Model):
-    """
-        Gallery model
-    """
-    image_file = models.FileField(upload_to=get_upload_path_images_gallery)
+class PhotoGallery(models.Model):
+    id = models.AutoField(primary_key=True)
+    src = models.ImageField(upload_to=get_upload_path_images_gallery)
     def __str__(self):
         return self.image_file
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        try:
+            this = Gallery.objects.get(id=self.id)
+            if this.src != self.src:
+                this.src.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case
+        super(Sponsor,self).save(*args, **kwargs)
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
@@ -201,4 +218,29 @@ class Timeline(models.Model):
     text = models.TextField()
 
 class Sponsor(models.Model):
-    src = models.ImageField(upload_to=get_upload_path_image_sponsor)
+    id = models.AutoField(primary_key=True)
+    src = models.ImageField(upload_to=get_upload_path_images_sponsor)
+    def __str__(self):
+        return self.image_file
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        try:
+            this = Gallery.objects.get(id=self.id)
+            if this.src != self.src:
+                this.src.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case
+        super(Sponsor,self).save(*args, **kwargs)
+
+class MediaPartner(models.Model):
+    id = models.AutoField(primary_key=True)
+    src = models.ImageField(upload_to=get_upload_path_images_media_partner)
+    def __str__(self):
+        return self.image_file
+    def save(self, *args,**kwargs):
+        self.validate_unique()
+        try:
+            this = Gallery.objects.get(id=self.id)
+            if this.src != self.src:
+                this.src.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case
+        super(Media,self).save(*args, **kwargs)
