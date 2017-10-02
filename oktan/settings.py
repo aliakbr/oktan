@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # DEBUG = True
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', default=False, cast=bool)
+DEBUG = False;
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL')
