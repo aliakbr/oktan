@@ -38,6 +38,41 @@ def admin_dashboard(request):
     else:
         return redirect('oktansite:index')
 
+def generate_payment_proof(instance):
+    return "OKTAN-ITB-2017-PROVE-"+instance.team_name.upper()+"-"+str(instance.uuid)
+
+def generate_code(request, id):
+    template = 'oktan/view_peserta.html'
+    if request.user.is_staff:
+        peserta = Team.objects.get(id=id)
+        peserta.proof_code = generate_payment_proof(peserta)
+        peserta.save()
+        return redirect('oktansite:view_peserta', id)
+    else:
+        return redirect('oktansite:index')
+
+def delete_code(request, id):
+    template = 'oktan/view_peserta.html'
+    if request.user.is_staff:
+        peserta = Team.objects.get(id=id)
+        peserta.proof_code = ""
+        peserta.save()
+        return redirect('oktansite:view_peserta', id)
+    else:
+        return redirect('oktansite:index')
+
+def view_peserta(request, id):
+    template = 'oktan/view_peserta.html'
+    if request.user.is_staff:
+        account_peserta = Account.objects.get(team=id)
+        peserta = Team.objects.get(pk=id)
+        return render(request, template, {
+            'peserta': peserta,
+            'account_peserta': account_peserta,
+        })
+    else:
+        return redirect('oktansite:index')
+
 def add_news(request):
     template = 'oktan/addnews.html'
     if request.user.is_staff:

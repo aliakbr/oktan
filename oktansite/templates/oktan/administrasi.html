@@ -101,17 +101,17 @@
                             <div class="content">
                                 <form method=POST action="{% url 'oktansite:administrasi' %}" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                	<div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>ID Tim</label>
-                                                <input type="text" class="form-control" disabled placeholder="ID Tim" value="{{ team.id }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% if message%}
-                                      <p> {{message}} </p>
-                                    {% endif %}
+																{% if message%}
+																	<p> {{message}} </p>
+																{% endif %}
+                                    <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label>Kode Bukti Bayar</label>
+                                                  <input type="text" class="form-control" disabled placeholder="ID Tim" value="{{ team.proof_code }}">
+                                              </div>
+                                          </div>
+                                      </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">

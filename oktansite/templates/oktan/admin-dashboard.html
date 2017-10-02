@@ -121,14 +121,12 @@
                   <th>Nama Tim</th>
                   <th>Asal Sekolah</th>
                   <th></th>
-                  <th></th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Nama Tim</th>
                   <th>Asal Sekolah</th>
-                  <th></th>
                   <th></th>
                 </tr>
               </tfoot>
@@ -138,10 +136,7 @@
                     <td>{{peserta.team_name}}</td>
                     <td>{{peserta.school_name}}</td>
                     <td>
-                      <button type="button" class="btn btn-primary">Edit</button>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <a href="{% url 'oktansite:view_peserta' peserta.id %}" class="btn btn-primary">View</button>
                     </td>
                   </tr>
                 {% endfor %}

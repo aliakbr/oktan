@@ -117,7 +117,8 @@ class Team(models.Model):
     """
         Team Model
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     team_name = models.CharField(max_length=50, null=False, unique=True)
     supervisor_name = models.CharField(max_length=100, null=False)
     school_name = models.CharField(max_length=150, null=False)
@@ -130,6 +131,7 @@ class Team(models.Model):
     student_phone_number_2 = models.CharField(max_length=50, null=True)
     student_id_number_2 = models.CharField(max_length=100, null=True)
     student_card_image_2 = models.ImageField(upload_to=get_upload_path_images_student_card2, null=True)
+    proof_code = models.CharField(max_length=400, null=True)
     def __str__(self):
         return self.team_name
 

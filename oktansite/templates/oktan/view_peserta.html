@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'oktan/img/asset/favicon.png' %}">
+  <title>Admin | Oktan ITB 2018</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'oktan/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'oktan/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="{% static 'oktan/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'oktan/css/admin.css' %}" rel="stylesheet">
+
+  <!-- Editor -->
+  <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+
+</head>
+<body class="fixed-nav" id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="{% url 'oktansite:index' %}">
+      <img class="brand" src="{% static 'oktan/img/asset/thumbnail/logo.png' %}"></img>
+      <span class="nav-link-text">
+        Oktan Admin</span>
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %}">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">
+              Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="#pendaftar">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">
+              Daftar Pendaftar</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#sponsorship">
+            <i class="fa fa-users"></i>
+            <span class="nav-link-text">
+              Sponsorship</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <a class="nav-link" href="#timeline">
+              <i class="fa fa-newspaper-o"></i>
+              <span class="nav-link-text">
+                Timeline</span>
+            </a>
+          </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#news">
+            <i class="fa fa-newspaper-o"></i>
+            <span class="nav-link-text">
+              News</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#about">
+            <i class="fa fa-newspaper-o"></i>
+            <span class="nav-link-text">
+              About Content</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>
+            Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content-wrapper py-3">
+    <div class="container-fluid" id="admin-content">
+      <h3>View Peserta</h3>
+      <form action="#" method="POST">
+        <div class="form-group">
+            <label for="judul">Nama Tim<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.team_name }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Email<span class="req"></label>
+            <input type="text" class="form-control" value="{{ account_peserta.email }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">password<span class="req"></label>
+            <input type="text" class="form-control" value="{{ account_peserta.password }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nama Sekolah<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.school_name }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nama Supervisor<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.supervisor_name }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nama Peserta 1<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_name_1 }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">NISN/KTP peserta 1<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_id_number_1 }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nomor Telepon Peserta 1<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_phone_number_1}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Image Peserta 1<span class="req"></label>
+            <img src="{{ peserta.student_card_image_1 }}"></img>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nama Peserta 2<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_name_2 }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">NISN/KTP peserta 2<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_id_number_2 }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nomor Telepon Peserta 2<span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.student_phone_number_2}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="judul">Image Peserta 2<span class="req"></label>
+            <img src="{{ peserta.student_card_image_2 }}"></img>
+        </div>
+        <div class="form-group">
+            <label for="judul">Bukti Bayar<span class="req"></label>
+            <img src="{{ peserta.proof_of_payment }}"></img>
+        </div>
+        <div class="form-group">
+            <label for="judul">Nomor Kode Bukti Bayar <span class="req"></label>
+            <input type="text" class="form-control" value="{{ peserta.proof_code }}" disabled>
+        </div>
+        <a data-toggle="modal" data-target="#generateCode" class="btn btn-primary" style="text-align:center;">Generate Bukti Bayar</a>
+        <a href="{% url 'oktansite:delete_code' peserta.id %}" class="btn btn-danger" style="text-align:center;">Delete Bukti Bayar</a>
+    </form>
+    </div>
+    <!-- /.container-fluid -->
+
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Scroll to Top Button -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Select "Logout" below if you are ready to end your current session.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="{% url 'oktansite:admin_logout' %}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Modal -->
+  <div class="modal fade" id="generateCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure to generate code?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Select "Generate" below if you are ready
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href ="{% url 'oktansite:generate_code' peserta.id %}">Generate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'oktan/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'oktan/vendor/popper/popper.min.js' %}"></script>
+  <script src="{% static 'oktan/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'oktan/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'oktan/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'oktan/vendor/datatables/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'oktan/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+  <script>
+    CKEDITOR.replace('editor');
+    CKEDITOR.config.height = '18em';
+  </script>
+
+</body>
+</html>
