@@ -145,7 +145,7 @@
                                                 <label>Upload Bukti Pembayaran</label>
                                                 <input type="file" name="payment_proof" id="fileinput">
                                                 {% if team.proof_of_payment %}
-                                                  <img src="{{ team.proof_of_payment }}"></img>
+                                                  <img src="{{ team.proof_of_payment.url }}" width="400" height="400"></img>
                                                 {% endif %}
                                             </div>
                                         </div>

@@ -14,22 +14,45 @@ def get_upload_path_images_payment(instance, filename):
     """
         Function to get upload image payment proof dir path
     """
-    upload_dir = os.path.join('media', "%s" % instance.team_name)
-    filename = "payment_" + instance.team_name + "_" + filename
-    print(upload_dir)
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
+    upload_dir = "%s" % instance.team_name
+    extension = os.path.splitext(filename)[1]
+    filename = "payment_" + instance.team_name + extension
     return os.path.join(upload_dir, filename)
 
 def get_upload_path_images_student_card(instance, filename):
     """
         Function to get upload image student card dir path
     """
-    upload_dir = os.path.join('media', "%s" % instance.team_name)
-    filename = "student_id_" + instance.team_name + "_" + filename
+    upload_dir = "%s" % instance.team_name
+    extension = os.path.splitext(filename)[1]
+    filename = "student_id_" + extension
     print(upload_dir)
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
+    return os.path.join(upload_dir, filename)
+
+def get_upload_path_images_student_card1(instance, filename):
+    """
+        Function to get upload image student card dir path
+    """
+    upload_dir = "%s" % instance.team_name
+    extension = os.path.splitext(filename)[1]
+    filename = "student_id_1" + extension
+    print(upload_dir)
+    return os.path.join(upload_dir, filename)
+
+def get_upload_path_images_student_card2(instance, filename):
+    """
+        Function to get upload image student card dir path
+    """
+    upload_dir = "%s" % instance.team_name
+    extension = os.path.splitext(filename)[1]
+    filename = "student_id_1" + extension
+    print(upload_dir)
+    return os.path.join(upload_dir, filename)
+
+def get_upload_path_image_sponsor(instance, filename):
+    upload_dir = "sponsor"
+    extension = os.path.splitext(filename)[1]
+    filename = "sponsor"+extension
     return os.path.join(upload_dir, filename)
 
 def get_upload_path_images_gallery(instance, filename):
@@ -89,16 +112,25 @@ class Team(models.Model):
     student_name_1 = models.CharField(max_length=100, null=True)
     student_phone_number_1 = models.CharField(max_length=50, null=True)
     student_id_number_1 = models.CharField(max_length=100, null=True)
-    student_card_image_1 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
+    student_card_image_1 = models.ImageField(upload_to=get_upload_path_images_student_card1, null=True)
     student_name_2 = models.CharField(max_length=100, null=True)
     student_phone_number_2 = models.CharField(max_length=50, null=True)
     student_id_number_2 = models.CharField(max_length=100, null=True)
-    student_card_image_2 = models.FileField(upload_to=get_upload_path_images_student_card, null=True)
+    student_card_image_2 = models.ImageField(upload_to=get_upload_path_images_student_card2, null=True)
     def __str__(self):
         return self.team_name
 
     def save(self, *args,**kwargs):
         self.validate_unique()
+        try:
+            this = Team.objects.get(id=self.id)
+            if this.proof_of_payment != self.proof_of_payment:
+                this.proof_of_payment.delete(save=False)
+            if this.student_card_image_2 != self.student_card_image_2:
+                this.student_card_image_2.delete(save=False)
+            if this.student_card_image_1 != self.student_card_image_1:
+                this.student_card_image_1.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case
         super(Team,self).save(*args, **kwargs)
 
 class Account(AbstractBaseUser):
@@ -167,3 +199,6 @@ class Timeline(models.Model):
     id = models.AutoField(primary_key=True)
     tanggal = models.CharField(max_length=120)
     text = models.TextField()
+
+class Sponsor(models.Model):
+    src = models.ImageField(upload_to=get_upload_path_image_sponsor)

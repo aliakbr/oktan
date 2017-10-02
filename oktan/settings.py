@@ -130,6 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
-MEDIA_URL = 'D:\Kuliah\IF ITB\Lainnya\Project\oktan\oktan/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
 LOGIN_URL = '/login/'
-STATIC_ROOT = 'public/static/'
+STATIC_ROOT = '/static/'

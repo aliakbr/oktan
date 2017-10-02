@@ -139,7 +139,7 @@
                                             <label>Upload Kartu Identitas Anggota 1</label>
                                             <input type="file" name="student_card_image_1" id="fileinput">
                                             {% if team.student_card_image_1 %}
-                                              <img src="{{ MEDIA_URL }}/{{ team.student_card_image_1 }}"></img>
+                                              <img src="{{ team.student_card_image_1.url }}" width="400" height="400"></img>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@
                                             <label>Upload Kartu Identitas Anggota 2</label>
                                             <input name="student_card_image_2" type="file" id="fileinput">
                                             {% if team.student_card_image_2 %}
-                                              <img src="{{ team.student_card_image_2 }}"></img>
+                                              <img src="{{ team.student_card_image_2.url }}" width="400" height="400"></img>
                                             {% endif %}
                                         </div>
                                     </div>
