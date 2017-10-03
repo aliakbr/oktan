@@ -19,6 +19,5 @@ from django.conf.urls.static import static
 from oktan import settings
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^oktan/', include('oktansite.urls')),
+    url(r'^', include('oktansite.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
