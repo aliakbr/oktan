@@ -152,7 +152,7 @@ class Account(AbstractBaseUser):
     """
     Account model
     """
-    password = models.CharField(max_length=50, null=False)
+    password = models.CharField(max_length=255, null=False)
     email = models.EmailField(null=False, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
