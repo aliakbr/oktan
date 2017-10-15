@@ -228,12 +228,19 @@ def index(request):
     })
 
 def about(request):
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     template = 'oktan/about.html'
-    return render(request, template)
+    return render(request, template, {
+        'sponsor': sponsor,
+        'media_partner': media_partner
+    })
 
 def news(request):
     template = 'oktan/news.html'
     articles = []
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     news_list = News.objects.order_by("-pub_date")
     count = 0
     for news in news_list:
@@ -241,24 +248,44 @@ def news(request):
         count += 1
         if count == 5:
             break
-    return render(request, template, {'news': articles})
+    return render(request, template, {
+        'news': articles,
+        'sponsor': sponsor,
+        'media_partner': media_partner,
+    })
 
 def blog(request, id):
     template = 'oktan/post.html'
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     article = News.objects.get(pk = id)
-    return render(request, template, {'article' : article})
+    return render(request, template, {
+        'article' : article,
+        'sponsor': sponsor,
+        'media_partner': media_partner,
+    })
 
 def post(request):
     template = 'oktan/post.html'
     return render(request, template)
 
 def gallery(request):
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     template = 'oktan/gallery.html'
-    return render(request, template)
+    return render(request, template, {
+        'sponsor': sponsor,
+        'media_partner': media_partner,
+    })
 
 def contact(request):
+    sponsor = Sponsor.objects.first()
+    media_partner = MediaPartner.objects.first()
     template = 'oktan/contact.html'
-    return render(request, template)
+    return render(request, template,{
+        'sponsor': sponsor,
+        'media_partner': media_partner,
+    })
 
 def login_page(request):
     template = 'oktan/login.html'
