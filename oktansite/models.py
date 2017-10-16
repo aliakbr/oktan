@@ -126,11 +126,14 @@ class Team(models.Model):
     student_name_1 = models.CharField(max_length=100, null=True)
     student_phone_number_1 = models.CharField(max_length=50, null=True)
     student_id_number_1 = models.CharField(max_length=100, null=True)
+    student_id_line_1 = models.CharField(max_length=50, null=True)
     student_card_image_1 = models.ImageField(upload_to=get_upload_path_images_student_card1, null=True)
     student_name_2 = models.CharField(max_length=100, null=True)
     student_phone_number_2 = models.CharField(max_length=50, null=True)
     student_id_number_2 = models.CharField(max_length=100, null=True)
+    student_id_line_2 = models.CharField(max_length=50, null=True)
     student_card_image_2 = models.ImageField(upload_to=get_upload_path_images_student_card2, null=True)
+    rayon = models.CharField(max_length=100, null=True)
     proof_code = models.CharField(max_length=400, null=True)
     def __str__(self):
         return self.team_name

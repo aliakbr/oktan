@@ -307,6 +307,31 @@ def administration(request):
             obj.team_name = request.POST["team_name"]
             if 'payment_proof' in request.FILES:
                 obj.proof_of_payment = request.FILES['payment_proof']
+            RAYON_ENUM ={
+                      'bali': 'Bali',
+                      'banyuwangi': 'Banyuwangi - Banyuwangi, Jember, Bondowoso, Situ bondo',
+                      'bandung': 'Bandung - Bandung Raya, Sumedang, Subang',
+                      'bogor': 'Bogor - Bogor, Sukabumi, Cianjur',
+                      'cirebon': 'Cirebon - Cirebon, Majalengka, Indramayu, Tegal, Kuningan',
+                      'karawang': 'Karawang - Karawang, Bekasi, Purwakarta',
+                      'jakarta': 'Jakarta - Jakarta Raya',
+                      'lampung': 'Lampung',
+                      'makassar': 'Makassar - Sulawesi dan Indonesia Timur',
+                      'malang': 'Malang - Malang, Lumajang, Mojokerto',
+                      'medan': 'Medan - Banda Aceh, Medan',
+                      'padang': 'Padang - Padang, Jambi, Riau',
+                      'palembang': 'Palembang - Palembang, Bangka, Bengkulu',
+                      'samarinda': 'Samarinda - Kalimantan',
+                      'semarang': 'Semarang - Semarang, Demak, Salatiga, Kudus, Jepara',
+                      'serang': 'Serang - Serang, Pandeglang, Cilegon, Lebak, Merak',
+                      'surakarta': 'Surakarta - Surakarta, Boyolali, Karanganyar, Wonogiri',
+                      'surabaya': 'Surabaya - Surabaya, Gresik, Lamongan, Mojokerto',
+                      'tangerang': 'Tangerang',
+                      'tasikmalaya': 'Tasikmalaya - Tasikmalaya, Ciamis, Garut, Banjar',
+                  }
+            rayon = request.POST["rayon"]
+            if rayon:
+                obj.rayon = RAYON_ENUM[rayon]
             obj.save()
             message = "Data Modified!"
             return render(request, template, {
@@ -339,11 +364,13 @@ def member(request):
         obj.student_name_1 = request.POST["student_name_1"]
         obj.student_id_number_1 = request.POST["student_id_number_1"]
         obj.student_phone_number_1 = request.POST["student_phone_number_1"]
+        obj.student_id_line_1 = request.POST["student_id_line_1"]
         if 'student_card_image_1' in request.FILES:
             obj.student_card_image_1 = request.FILES['student_card_image_1']
         obj.student_name_2 = request.POST["student_name_2"]
         obj.student_id_number_2 = request.POST["student_id_number_2"]
         obj.student_phone_number_2 = request.POST["student_phone_number_2"]
+        obj.student_id_line_2 = request.POST["student_id_line_2"]
         if 'student_card_image_2' in request.FILES:
             obj.student_card_image_2 = request.FILES['student_card_image_2']
         obj.save()
