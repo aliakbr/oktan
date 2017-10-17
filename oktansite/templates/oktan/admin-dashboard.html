@@ -95,16 +95,20 @@
 
   <div class="content-wrapper py-3">
     <div class="container-fluid" style="margin-top: 20px;">
-        <div class="alert alert-danger alert-dismissable">
+      {% if deleted %}
+          <div class="alert alert-danger alert-dismissable">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Error! </strong> Berita telah dihapus.
+            <strong>Error! </strong> Data telah dihapus.
           </div>
+      {% endif %}
     </div>
     <div class="container-fluid" style="margin-top: 20px;">
-        <div class="alert alert-success alert-dismissable">
+        {% if success %}
+          <div class="alert alert-success alert-dismissable">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success! </strong> Berita telah ditambahkan.
+            <strong>Success! </strong> Data telah ditambahkan/diubah.
           </div>
+        {% endif %}
     </div>
     <div class="container-fluid" id="admin-content">
       <!-- Icon Cards -->

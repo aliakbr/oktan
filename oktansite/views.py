@@ -24,7 +24,7 @@ def login_admin(request):
         else:
             return render(request, template)
 
-def admin_dashboard(request):
+def admin_dashboard(request, success=None, deleted=None):
     template = 'oktan/admin-dashboard.html'
     if request.user.is_staff:
         list_peserta = Team.objects.all()
@@ -34,7 +34,9 @@ def admin_dashboard(request):
             'list_peserta': list_peserta,
             'list_news': list_news,
             'timeline': timeline,
-            })
+            'success': success,
+            'deleted': deleted,
+        })
     else:
         return redirect('oktansite:index')
 
@@ -82,6 +84,7 @@ def add_news(request):
             article = News()
             article.title = title
             article.text = body
+            article.attachment = request.FILES['attachment']
             article.save()
             return redirect('oktansite:admin_dashboard')
         else:
@@ -96,6 +99,7 @@ def edit_news(request, id):
         if request.method == "POST":
             news.title = request.POST['title']
             news.text = request.POST['body']
+            news.attachment = request.FILES['attachment']
             news.save()
             return redirect('oktansite:admin_dashboard')
         else:
@@ -154,8 +158,8 @@ def add_media(request):
 def edit_about(request):
     template = 'oktan/editabout.html'
     if request.user.is_staff:
+        about = About.objects.first()
         if request.method == "POST":
-            about = About.objects.first()
             if (about):
                 about.text = request.POST['text']
                 about.save()
@@ -163,9 +167,11 @@ def edit_about(request):
                 about = About()
                 about.text = request.POST['text']
                 about.save()
-            return redirect('oktansite:admin_dashboard')
+            return redirect('oktansite:editabout')
         else:
-            return render(request, template)
+            return render(request, template, {
+                'about': about
+            })
     else:
         return redirect('oktansite:index')
 
@@ -230,10 +236,12 @@ def index(request):
 def about(request):
     sponsor = Sponsor.objects.first()
     media_partner = MediaPartner.objects.first()
+    about = About.objects.first()
     template = 'oktan/about.html'
     return render(request, template, {
         'sponsor': sponsor,
-        'media_partner': media_partner
+        'media_partner': media_partner,
+        'about': about,
     })
 
 def news(request):

@@ -78,6 +78,13 @@ def get_upload_path_images_media_partner(instance, filename):
     filename = "mediaPartner"+extension
     return os.path.join(upload_dir, filename)
 
+def get_upload_path_news_attachment(instance, filename):
+    """
+        Function to get upload path for news
+    """
+    upload_dir = "newsAttachment"
+    return os.path.join(upload_dir, filename)
+
 # Create your models here.
 
 class AccountManager(BaseUserManager):
@@ -211,9 +218,18 @@ class News(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=120)
     text = models.TextField()
+    attachment = models.FileField(upload_to=get_upload_path_news_attachment, null=True)
     pub_date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
         return self.id
+    def save(self, *args,**kwargs):
+        try:
+            this = News.objects.get(id=self.id)
+            if this.attachment != self.attachment:
+                this.attachment.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case
+        super(News,self).save(*args, **kwargs)
+
 
 class About(models.Model):
     id = models.AutoField(primary_key=True)

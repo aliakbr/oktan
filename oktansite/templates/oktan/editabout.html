@@ -50,35 +50,35 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="#pendaftar">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #pendaftar">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">
               Daftar Pendaftar</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#sponsorship">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #sponsorship">
             <i class="fa fa-users"></i>
             <span class="nav-link-text">
               Sponsorship</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-            <a class="nav-link" href="#timeline">
+            <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #timeline">
               <i class="fa fa-newspaper-o"></i>
               <span class="nav-link-text">
                 Timeline</span>
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#news">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #news">
             <i class="fa fa-newspaper-o"></i>
             <span class="nav-link-text">
               News</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#about">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #about">
             <i class="fa fa-newspaper-o"></i>
             <span class="nav-link-text">
               About Content</span>
@@ -96,13 +96,29 @@
   </nav>
 
   <div class="content-wrapper py-3">
+    <div class="container-fluid" style="margin-top: 20px;">
+      {% if deleted %}
+          <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error! </strong> Data telah dihapus.
+          </div>
+      {% endif %}
+    </div>
+    <div class="container-fluid" style="margin-top: 20px;">
+        {% if success %}
+          <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success! </strong> Data telah ditambahkan/diubah.
+          </div>
+        {% endif %}
+    </div>
     <div class="container-fluid" id="admin-content">
       <h3>Edit About Page</h3>
       <form action="{% url 'oktansite:editabout' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
             <label for="editor">Deskripsi<span class="req">*</span>:</label>
-            <textarea name="text" id="editor">Masukan deskripsi</textarea>
+            <textarea name="text" id="editor">{{ about.text }}</textarea>
         </div>
         <button class="btn btn-primary" style="text-align:center;">Ubah</button>
     </form>

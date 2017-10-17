@@ -113,6 +113,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Session Handler, cookie age in 2 hour or session closed after page closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 2*60*60
+
 # User model
 AUTH_USER_MODEL = "oktansite.Account"
 
