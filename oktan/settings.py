@@ -44,7 +44,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
 }
 
-ALLOWED_HOSTS = ['www.oktanitb.com', 'oktanitb.com']
+ALLOWED_HOSTS = ['www.oktanitb.com', 'oktanitb.com', 'oktan-test.herokuapp.com']
 
 
 # Application definition
