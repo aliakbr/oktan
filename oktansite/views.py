@@ -3,9 +3,31 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .models import *
+from django.conf import settings
 from django.core.exceptions import ValidationError
 
 # Create your views here.
+
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+# 20MB - 20971520
+# 50MB - 5242880
+# 100MB - 104857600
+# 250MB - 214958080
+# 500MB - 429916160
+MAX_UPLOAD_SIZE = 2 * 1024 * 1024
+
+#file size Handler
+def size_checker(file):
+    if file:
+        if file.size > MAX_UPLOAD_SIZE:
+            return False
+        else:
+            return True
+    else:
+        return True
+
 
 # Admin View
 def login_admin(request):
@@ -63,6 +85,11 @@ def delete_code(request, id):
     else:
         return redirect('oktansite:index')
 
+def delete_peserta(request, id):
+    peserta = Team.objects.get(id=id)
+    peserta.delete()
+    return redirect('oktansite:admin_dashboard')
+
 def view_peserta(request, id):
     template = 'oktan/view_peserta.html'
     if request.user.is_staff:
@@ -84,9 +111,15 @@ def add_news(request):
             article = News()
             article.title = title
             article.text = body
-            article.attachment = request.FILES['attachment']
-            article.save()
-            return redirect('oktansite:admin_dashboard')
+            attachment = request.FILES['attachment']
+            if size_checker(attachment):
+                article.attachment = attachment
+                return redirect('oktansite:admin_dashboard')
+                article.save()
+            else:
+                return render(request, template,{
+                    "msg" : "File Size too Big",
+                })
         else:
             return render(request, template)
     else:
@@ -301,6 +334,7 @@ def login_page(request):
 
 @login_required
 def administration(request):
+    print (settings.MEDIA_ROOT)
     template = 'oktan/administrasi.html'
     team = request.user.team
     if request.method == 'GET':
@@ -313,8 +347,6 @@ def administration(request):
             obj.school_name = request.POST["school_name"]
             obj.supervisor_name = request.POST["supervisor_name"]
             obj.team_name = request.POST["team_name"]
-            if 'payment_proof' in request.FILES:
-                obj.proof_of_payment = request.FILES['payment_proof']
             RAYON_ENUM ={
                       'bali': 'Bali',
                       'banyuwangi': 'Banyuwangi - Banyuwangi, Jember, Bondowoso, Situ bondo',
@@ -340,12 +372,22 @@ def administration(request):
             rayon = request.POST["rayon"]
             if rayon:
                 obj.rayon = RAYON_ENUM[rayon]
-            obj.save()
-            message = "Data Modified!"
-            return render(request, template, {
-                'message': message,
-                'team': obj
-            })
+            if 'payment_proof' in request.FILES:
+                proof_of_payment = request.FILES['payment_proof']
+            if size_checker(proof_of_payment):
+                obj.proof_of_payment = proof_of_payment
+                obj.save()
+                message = "Data Modified!"
+                return render(request, template, {
+                    'message': message,
+                    'team': obj
+                })
+            else:
+                message = "File Size is too big!"
+                return render(request, template, {
+                    'message': message,
+                    'team': team
+                })
         except ValidationError as e:
             message = ';'.join(e.messages)
             return render(request, template, {
@@ -373,20 +415,27 @@ def member(request):
         obj.student_id_number_1 = request.POST["student_id_number_1"]
         obj.student_phone_number_1 = request.POST["student_phone_number_1"]
         obj.student_id_line_1 = request.POST["student_id_line_1"]
-        if 'student_card_image_1' in request.FILES:
-            obj.student_card_image_1 = request.FILES['student_card_image_1']
         obj.student_name_2 = request.POST["student_name_2"]
         obj.student_id_number_2 = request.POST["student_id_number_2"]
         obj.student_phone_number_2 = request.POST["student_phone_number_2"]
         obj.student_id_line_2 = request.POST["student_id_line_2"]
+        if 'student_card_image_1' in request.FILES:
+            obj.student_card_image_1 = request.FILES['student_card_image_1']
         if 'student_card_image_2' in request.FILES:
             obj.student_card_image_2 = request.FILES['student_card_image_2']
-        obj.save()
-        message = "Data Modified!"
-        return render(request, template, {
-            'message': message,
-            'team': obj
-        })
+        if (size_checker(obj.student_card_image_2) and size_checker(obj.student_card_image_1)):
+            obj.save()
+            message = "Data Modified!"
+            return render(request, template, {
+                'message': message,
+                'team': obj
+            })
+        else:
+            message = "File Size is too Big"
+            return render(request, template, {
+                'message': message,
+                'team': team
+            })
 
 def login(request):
     if request.user.is_authenticated:

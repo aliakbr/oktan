@@ -100,6 +100,9 @@
       <h3>Add News Form</h3>
       <form action="{% url 'oktansite:addnews' %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
+        {% if msg %}
+          <p> {{msg}} </p>
+        {% endif %}
         <div class="form-group">
             <label for="judul">Judul Berita<span class="req">*</span>:</label>
             <input type="text" class="form-control" id="judul" placeholder="Enter Title" name="title" required>

@@ -26,30 +26,30 @@ ADMINS = (
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = ')1iio1^wieu994*3v5ilc)f1x(u7c5&jxb4@69*bu=m0li1vx2'
-#
-#
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-#
-# # Database
-# # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-# # local database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-# ALLOWED_HOSTS = ['*']
+SECRET_KEY = ')1iio1^wieu994*3v5ilc)f1x(u7c5&jxb4@69*bu=m0li1vx2'
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = False
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+# Database
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+# local database
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['www.oktanitb.com', 'oktanitb.com', 'oktan-test.herokuapp.com']
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+# DEBUG = False
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+# }
+#
+# ALLOWED_HOSTS = ['www.oktanitb.com', 'oktanitb.com', 'oktan-test.herokuapp.com']
 
 
 # Application definition
@@ -161,7 +161,7 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/login/'
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
