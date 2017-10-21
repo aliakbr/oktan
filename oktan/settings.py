@@ -16,6 +16,11 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+#ADMINS LIST
+ADMINS = (
+  ('Ali Akbar', 'ali.akbar.mawardi@gmail.com'),
+  # ('Oktan ITB', 'oktanitb2018@gmail.com')
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -39,7 +44,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = False
+DEBUG = True
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
 }
