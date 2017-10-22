@@ -62,6 +62,18 @@ def admin_dashboard(request, success=None, deleted=None):
     else:
         return redirect('oktansite:index')
 
+def list_peserta(request, success=None, deleted=None):
+    template = 'oktan/daftarpendaftar.html'
+    if request.user.is_staff:
+        list_peserta = Team.objects.all()
+        return render(request, template,{
+            'list_peserta': list_peserta,
+            'success': success,
+            'deleted': deleted,
+        })
+    else:
+        return redirect('oktansite:index')
+
 def generate_payment_proof(instance):
     return "OKTAN-ITB-2017-PROVE-"+instance.team_name.upper()+"-"+str(instance.uuid)
 

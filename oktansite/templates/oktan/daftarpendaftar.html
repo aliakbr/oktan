@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% block content %}
 <html lang="en">
 <head>
 
@@ -24,8 +25,23 @@
   <!-- Custom styles for this template -->
   <link href="{% static 'oktan/css/admin.css' %}" rel="stylesheet">
 
-  <!-- Editor -->
-  <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+  <style>
+      .pagination li {
+          border: 0.2px solid #e9ecef;
+          padding: 3px 5px;
+      }
+      .pagination li.active{
+          color: white;
+          background-color: #337ab7;
+      }
+      .pagination li.disabled a {
+        pointer-events: none;
+        color: black;
+      }
+      .pagination li.active a {
+        color: white;
+      }
+  </style>
 
 </head>
 <body class="fixed-nav" id="page-top">
@@ -42,14 +58,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %}">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">
               Dashboard</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="{% url 'oktansite:listpeserta' %}">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">
@@ -57,28 +73,28 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#sponsorship">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #sponsorship">
             <i class="fa fa-users"></i>
             <span class="nav-link-text">
               Sponsorship</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-            <a class="nav-link" href="#timeline">
+            <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #timeline">
               <i class="fa fa-newspaper-o"></i>
               <span class="nav-link-text">
                 Timeline</span>
             </a>
-        </li>
+          </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#news">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #news">
             <i class="fa fa-newspaper-o"></i>
             <span class="nav-link-text">
               News</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="#about">
+          <a class="nav-link" href="{% url 'oktansite:admin_dashboard' %} #about">
             <i class="fa fa-newspaper-o"></i>
             <span class="nav-link-text">
               About Content</span>
@@ -96,22 +112,104 @@
   </nav>
 
   <div class="content-wrapper py-3">
-    <div class="container-fluid" id="admin-content">
-      <h3>Add Timeline</h3>
-      <form action="{% url 'oktansite:add_timeline' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="judul">Tanggal<span class="req">*</span>:</label>
-            <input type="text" class="form-control" id="judul" placeholder="Tanggal" name="tanggal" required>
-        </div>
-        <div class="form-group">
-            <label for="editor">Deskripsi<span class="req">*</span>:</label>
-            <textarea name="body" id="editor">Masukan deskripsi</textarea>
-        </div>
-        <button type=submit class="btn btn-primary" style="text-align:center;">Terbitkan</button>
-    </form>
+    <div class="container-fluid" style="margin-top: 20px;">
+      {% if deleted %}
+          <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error! </strong> Data telah dihapus.
+          </div>
+      {% endif %}
     </div>
-    <!-- /.container-fluid -->
+    <div class="container-fluid" style="margin-top: 20px;">
+        {% if success %}
+          <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success! </strong> Data telah ditambahkan/diubah.
+          </div>
+        {% endif %}
+    </div>
+    <div class="container-fluid" id="admin-content">
+      <!-- Icon Cards -->
+      <div class="card mb-3" id="pendaftar">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-8 col-xs-6">
+                    <i class="fa fa-table"></i>
+                    Pendaftar            
+                </div>
+                <div class="col-md-4 col-xs-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari tim...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Cari</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Nama Tim</th>
+                  <th>Asal Sekolah</th>
+                  <th>Bukti Pembayaran</th>
+                  <th>Status Kode Bayar</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Nama Tim</th>
+                  <th>Asal Sekolah</th>
+                  <th>Bukti Pembayaran</th>
+                  <th>Status Kode Bayar</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+              <tbody>
+                {% for peserta in list_peserta %}
+                  <tr>
+                    <td>{{peserta.team_name}}</td>
+                    <td>{{peserta.school_name}}</td>
+                    <td>{{peserta.proof_of_payment}}</td>
+                    <td>{{peserta.proof_code}}</td>
+                    <td>
+                      <a href="{% url 'oktansite:view_peserta' peserta.id %}" class="btn btn-primary">View</button>
+                    </td>
+                    <td>
+                      <a href="{% url 'oktansite:delete_peserta' peserta.id %}" class="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="disabled">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <li class="active disabled"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
   <!-- /.content-wrapper -->
@@ -136,7 +234,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="{% url 'oktansite:admin_logout' %}">Logout</a>
         </div>
       </div>
     </div>
@@ -153,10 +251,6 @@
   <script src="{% static 'oktan/vendor/datatables/jquery.dataTables.js' %}"></script>
   <script src="{% static 'oktan/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
 
-  <script>
-    CKEDITOR.replace('editor');
-    CKEDITOR.config.height = '18em';
-  </script>
-
 </body>
+{% endblock %}
 </html>

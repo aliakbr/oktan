@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="#pendaftar">
+          <a class="nav-link" href="{% url 'oktansite:listpeserta' %}">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">
               Daftar Pendaftar</span>
@@ -111,50 +111,6 @@
         {% endif %}
     </div>
     <div class="container-fluid" id="admin-content">
-      <!-- Icon Cards -->
-      <div class="card mb-3" id="pendaftar">
-        <div class="card-header">
-            <i class="fa fa-table"></i>
-            Pendaftar
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Nama Tim</th>
-                  <th>Asal Sekolah</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Nama Tim</th>
-                  <th>Asal Sekolah</th>
-                  <th></th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {% for peserta in list_peserta %}
-                  <tr>
-                    <td>{{peserta.team_name}}</td>
-                    <td>{{peserta.school_name}}</td>
-                    <td>
-                      <a href="{% url 'oktansite:view_peserta' peserta.id %}" class="btn btn-primary">View</button>
-                    </td>
-                    <td>
-                      <a href="{% url 'oktansite:delete_peserta' peserta.id %}" class="btn btn-danger">Delete</button>
-                    </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Example Tables Card -->
     <div class="card mb-3" id="sponsorship">
       <div class="card-header">
