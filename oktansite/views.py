@@ -126,8 +126,8 @@ def add_news(request):
             attachment = request.FILES['attachment']
             if size_checker(attachment):
                 article.attachment = attachment
-                return redirect('oktansite:admin_dashboard')
                 article.save()
+                return redirect('oktansite:admin_dashboard')
             else:
                 return render(request, template,{
                     "msg" : "File Size too Big",
