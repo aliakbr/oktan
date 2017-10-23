@@ -219,6 +219,7 @@ class News(models.Model):
     title = models.CharField(max_length=120)
     text = models.TextField()
     attachment = models.FileField(upload_to=get_upload_path_news_attachment, null=True)
+    image = models.ImageField(upload_to=get_upload_path_news_attachment, null=True)
     pub_date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
         return self.id
@@ -227,6 +228,8 @@ class News(models.Model):
             this = News.objects.get(id=self.id)
             if this.attachment != self.attachment:
                 this.attachment.delete(save=False)
+            if this.image != self.image:
+                this.image.delete(save=False)
         except: pass # when new photo then we do nothing, normal case
         super(News,self).save(*args, **kwargs)
 

@@ -180,9 +180,25 @@ def add_news(request):
             article = News()
             article.title = title
             article.text = body
-            attachment = request.FILES['attachment']
-            if size_checker(attachment):
-                article.attachment = attachment
+            attachment = None
+            image = None
+            if 'attachment' in request.FILES:
+                attachment = request.FILES['attachment']
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+            valid = True
+            if attachment or image:
+                if attachment and valid:
+                    if size_checker(attachment):
+                        article.attachment = attachment
+                    else:
+                        valid = False
+                if image and valid:
+                    if size_checker(attachment):
+                        article.image = image
+                    else:
+                        valid = False
+            if valid:
                 article.save()
                 return redirect('oktansite:admin_dashboard')
             else:
@@ -201,8 +217,31 @@ def edit_news(request, id):
         if request.method == "POST":
             news.title = request.POST['title']
             news.text = request.POST['body']
-            news.attachment = request.FILES['attachment']
-            news.save()
+            attachment = None
+            image = None
+            if 'attachment' in request.FILES:
+                attachment = request.FILES['attachment']
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+            valid = True
+            if attachment or image:
+                if attachment and valid:
+                    if size_checker(attachment):
+                        news.attachment = attachment
+                    else:
+                        valid = False
+                if image and valid:
+                    if size_checker(attachment):
+                        news.image = image
+                    else:
+                        valid = False
+            if valid:
+                news.save()
+                return redirect('oktansite:admin_dashboard')
+            else:
+                return render(request, template,{
+                    "msg" : "File Size too Big",
+                })
             return redirect('oktansite:admin_dashboard')
         else:
             return render(request, template, {'news': news})
