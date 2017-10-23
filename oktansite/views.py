@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from .models import *
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -61,13 +62,70 @@ def admin_dashboard(request, success=None, deleted=None):
         })
     else:
         return redirect('oktansite:index')
+def search_peserta(request):
+    template = 'oktan/daftarpendaftar.html'
+    if request.user.is_staff:
+        if (request.method == 'POST'):
+            if 'keyword' in request.POST:
+                keyword = request.POST['keyword']
+            else:
+                keyword = None
+            opt = request.POST['opt']
+            list_peserta = Team.objects.get_queryset().order_by('id')
+            peserta_found = []
+            for m in list_peserta:
+                if keyword:
+                    if (keyword.lower() in m.team_name.lower()) or (keyword.lower() in m.school_name.lower()):
+                        if opt == 'bayar' and m.proof_of_payment:
+                            peserta_found.append(m)
+                        elif opt == 'belumbayar' and not m.proof_of_payment:
+                            peserta_found.append(m)
+                        elif not opt:
+                            peserta_found.append(m)
+                else:
+                    if opt == 'bayar' and m.proof_of_payment:
+                        peserta_found.append(m)
+                    elif opt == 'belumbayar' and not m.proof_of_payment:
+                        peserta_found.append(m)
+                    elif not opt:
+                        peserta_found.append(m)
+            if peserta_found:
+                paginator = Paginator(peserta_found, 25)
+                page = request.GET.get('page')
+                try:
+                    peserta = paginator.page(page)
+                except PageNotAnInteger:
+                    # If page is not an integer, deliver first page.
+                    peserta = paginator.page(1)
+                except EmptyPage:
+                    # If page is out of range (e.g. 9999), deliver last page of results.
+                    peserta = paginator.page(paginator.num_pages)
+            else:
+                peserta = list_peserta
+            return render(request, template,{
+                'list_peserta': peserta,
+            })
+        else:
+            return redirect('oktansite:listpeserta')
+    else:
+        return redirect('oktansite:index')
 
 def list_peserta(request, success=None, deleted=None):
     template = 'oktan/daftarpendaftar.html'
     if request.user.is_staff:
-        list_peserta = Team.objects.all()
+        list_peserta = Team.objects.get_queryset().order_by('id')
+        paginator = Paginator(list_peserta, 25)
+        page = request.GET.get('page')
+        try:
+            peserta = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            peserta = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            peserta = paginator.page(paginator.num_pages)
         return render(request, template,{
-            'list_peserta': list_peserta,
+            'list_peserta': peserta,
             'success': success,
             'deleted': deleted,
         })

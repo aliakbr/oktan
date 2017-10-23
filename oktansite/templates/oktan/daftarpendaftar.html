@@ -135,15 +135,23 @@
             <div class="row">
                 <div class="col-md-8 col-xs-6">
                     <i class="fa fa-table"></i>
-                    Pendaftar            
+                    Pendaftar
                 </div>
                 <div class="col-md-4 col-xs-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari tim...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Cari</button>
-                        </span>
-                    </div>
+                    <form action="{% url 'oktansite:search_peserta' %}" method=POST>
+                      {% csrf_token %}
+                      <div class="input-group">
+                          <input type="text" class="form-control" name="keyword" placeholder="Cari tim...">
+                          <select class="form-control" name="opt">
+                            <option value="" selected="selected">--------</option>
+                            <option value="bayar">Sudah Bayar</option>
+                            <option value="belumbayar">Belum Bayar</option>
+                          </select>
+                          <span class="input-group-btn">
+                              <button class="btn btn-default" type="submit">Cari</button>
+                          </span>
+                      </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -154,8 +162,8 @@
                 <tr>
                   <th>Nama Tim</th>
                   <th>Asal Sekolah</th>
-                  <th>Bukti Pembayaran</th>
-                  <th>Status Kode Bayar</th>
+                  <th>Upload Bukti Pembayaran</th>
+                  <th>Generate Kode Bayar</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -164,8 +172,8 @@
                 <tr>
                   <th>Nama Tim</th>
                   <th>Asal Sekolah</th>
-                  <th>Bukti Pembayaran</th>
-                  <th>Status Kode Bayar</th>
+                  <th>Upload Bukti Pembayaran</th>
+                  <th>Generate Kode Bayar</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -175,8 +183,18 @@
                   <tr>
                     <td>{{peserta.team_name}}</td>
                     <td>{{peserta.school_name}}</td>
-                    <td>{{peserta.proof_of_payment}}</td>
-                    <td>{{peserta.proof_code}}</td>
+                    <td>{% if peserta.proof_of_payment %}
+                          Sudah
+                        {% else %}
+                          Belum
+                        {% endif %}
+                    </td>
+                    <td>{% if peserta.proof_code %}
+                          Sudah
+                        {% else %}
+                          Belum
+                        {% endif %}
+                    </td>
                     <td>
                       <a href="{% url 'oktansite:view_peserta' peserta.id %}" class="btn btn-primary">View</button>
                     </td>
@@ -193,12 +211,14 @@
                     <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
-                    </li>
-                    <li class="active disabled"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                  </li>
+                    {% if list_peserta.has_previous %}
+                      <li><a href="?page={{ list_peserta.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    <li class="active disabled"><a href="#">Page {{ list_peserta.number }} of {{ list_peserta.paginator.num_pages }}</a></li>
+                    {% if list_peserta.has_next %}
+                      <li><a href="?page={{ list_peserta.next_page_number }">Next</a></li>
+                    {% endif %}
                     <li>
                     <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>

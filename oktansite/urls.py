@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^admin_dashboard/delete_news/(?P<id>\d+)/', views.delete_news, name="delete_news"),
     url(r'^admin_dashboard/editabout', views.edit_about, name="editabout"),
     url(r'^admin_dashboard/addsponsor', views.add_sponsor, name="addsponsor"),
+    url(r'^admin_dashboard/search_peserta', views.search_peserta, name="search_peserta"),
     url(r'^admin_dashboard/listpeserta', views.list_peserta, name="listpeserta"),
     url(r'^admin_dashboard/', views.admin_dashboard, name="admin_dashboard"),
     url(r'^admin_logout/', views.admin_logout, name="admin_logout"),
