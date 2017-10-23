@@ -137,7 +137,9 @@
         </div>
         <div class="form-group">
             <label for="judul">Image Peserta 1<span class="req"></label>
-            <img src="{{ peserta.student_card_image_1 }}"></img>
+              {% if peserta.student_card_image_1 %}
+                <img src="{{ peserta.student_card_image_1.url }}"></img>
+              {% endif %}
         </div>
         <div class="form-group">
             <label for="judul">Nama Peserta 2<span class="req"></label>
@@ -157,11 +159,15 @@
         </div>
         <div class="form-group">
             <label for="judul">Image Peserta 2<span class="req"></label>
-            <img src="{{ peserta.student_card_image_2 }}"></img>
+              {% if peserta.student_card_image_2 %}
+                <img src="{{ peserta.student_card_image_2.url }}"></img>
+              {% endif %}
         </div>
         <div class="form-group">
             <label for="judul">Bukti Bayar<span class="req"></label>
-            <img src="{{ peserta.proof_of_payment }}"></img>
+              {% if peserta.proof_of_payment %}
+                <img src="{{ peserta.proof_of_payment.url }}"></img>
+              {% endif %}
         </div>
         <div class="form-group">
             <label for="judul">Nomor Kode Bukti Bayar <span class="req"></label>
