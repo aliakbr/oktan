@@ -62,6 +62,7 @@ def admin_dashboard(request, success=None, deleted=None):
         })
     else:
         return redirect('oktansite:index')
+
 def search_peserta(request):
     template = 'oktan/daftarpendaftar.html'
     if request.user.is_staff:
@@ -101,7 +102,10 @@ def search_peserta(request):
                     # If page is out of range (e.g. 9999), deliver last page of results.
                     peserta = paginator.page(paginator.num_pages)
             else:
-                peserta = list_peserta
+                if keyword and not opt:
+                    peserta = list_peserta
+                else:
+                    peserta = peserta_found
             return render(request, template,{
                 'list_peserta': peserta,
             })
