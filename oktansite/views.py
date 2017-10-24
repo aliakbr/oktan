@@ -132,7 +132,7 @@ def list_peserta(request, success=None, deleted=None):
         return redirect('oktansite:index')
 
 def generate_payment_proof(instance):
-    return "OKTAN-ITB-2017-PROVE-"+instance.team_name.upper()+"-"+str(instance.uuid)
+    return "OKTAN-ITB-2017-PROVE-"+instance.team_name.upper()+"-"+'{0:05}'.format(instance.id)
 
 def generate_code(request, id):
     template = 'oktan/view_peserta.html'
@@ -162,8 +162,8 @@ def delete_peserta(request, id):
 def view_peserta(request, id):
     template = 'oktan/view_peserta.html'
     if request.user.is_staff:
-        account_peserta = Account.objects.get(team=id)
         peserta = Team.objects.get(pk=id)
+        account_peserta = Account.objects.get(team=peserta)
         return render(request, template, {
             'peserta': peserta,
             'account_peserta': account_peserta,
