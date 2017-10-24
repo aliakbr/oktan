@@ -159,11 +159,15 @@ def delete_peserta(request, id):
     peserta.delete()
     return redirect('oktansite:admin_dashboard')
 
+from django.core.exceptions import ObjectDoesNotExist
 def view_peserta(request, id):
     template = 'oktan/view_peserta.html'
     if request.user.is_staff:
         peserta = Team.objects.get(pk=id)
-        account_peserta = Account.objects.get(team=peserta)
+        try:
+            account_peserta = Account.objects.get(team=peserta)
+        except ObjectDoesNotExist:
+            account_peserta = None
         return render(request, template, {
             'peserta': peserta,
             'account_peserta': account_peserta,
