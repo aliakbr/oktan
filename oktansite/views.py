@@ -71,7 +71,10 @@ def search_peserta(request):
             keyword = None
         if 'keyword' in request.GET:
             keyword = request.GET['keyword']
-        opt = request.POST['opt']
+        if opt in request.POST['opt']:
+            opt = request.POST['opt']
+        else:
+            opt = None
         list_peserta = Team.objects.get_queryset().order_by('id')
         peserta_found = []
         if keyword:
