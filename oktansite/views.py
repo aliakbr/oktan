@@ -29,7 +29,6 @@ def size_checker(file):
     else:
         return True
 
-
 # Admin View
 def login_admin(request):
     template = 'oktan/login-admin.html'
@@ -484,22 +483,28 @@ def administration(request):
             rayon = request.POST["rayon"]
             if rayon:
                 obj.rayon = RAYON_ENUM[rayon]
+            modified = True
+            message = ''
             if 'payment_proof' in request.FILES:
                 proof_of_payment = request.FILES['payment_proof']
-            if size_checker(proof_of_payment):
-                obj.proof_of_payment = proof_of_payment
-                obj.save()
+                if size_checker(proof_of_payment):
+                    obj.proof_of_payment = proof_of_payment
+                else:
+                     message = "File Size is too big!"
+                     modified = False
+            if modified:
                 message = "Data Modified!"
+                obj.save()
                 return render(request, template, {
                     'message': message,
                     'team': obj
                 })
             else:
-                message = "File Size is too big!"
                 return render(request, template, {
                     'message': message,
                     'team': team
                 })
+
         except ValidationError as e:
             message = ';'.join(e.messages)
             return render(request, template, {
