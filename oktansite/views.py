@@ -65,46 +65,46 @@ def admin_dashboard(request, success=None, deleted=None):
 def search_peserta(request):
     template = 'oktan/daftarpendaftar.html'
     if request.user.is_staff:
-        if (request.method == 'POST'):
-            if 'keyword' in request.POST:
-                keyword = request.POST['keyword']
-            else:
-                keyword = None
-            opt = request.POST['opt']
-            list_peserta = Team.objects.get_queryset().order_by('id')
-            peserta_found = []
-            if keyword:
-                for m in list_peserta:
-                    if (keyword.lower() in m.team_name.lower()) or (keyword.lower() in m.school_name.lower()):
-                        peserta_found.append(m)
-            else:
-                peserta_found = list_peserta
-            target = []
-            if opt:
-                for m in peserta_found:
-                    if opt == 'bayar' and m.proof_of_payment:
-                        target.append(m)
-                    elif opt == 'belumbayar' and not m.proof_of_payment:
-                        target.append(m)
-                    elif not opt:
-                        target.append(m)
-            else:
-                target = peserta_found
-            paginator = Paginator(target, 25)
-            page = request.GET.get('page')
-            try:
-                peserta = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                peserta = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                peserta = paginator.page(paginator.num_pages)
-            return render(request, template,{
-                'list_peserta': peserta,
-            })
+        if 'keyword' in request.POST:
+            keyword = request.POST['keyword']
         else:
-            return redirect('oktansite:listpeserta')
+            keyword = None
+        if 'keyword' in request.GET:
+            keyword = request.GET['keyword']
+        opt = request.POST['opt']
+        list_peserta = Team.objects.get_queryset().order_by('id')
+        peserta_found = []
+        if keyword:
+            for m in list_peserta:
+                if (keyword.lower() in m.team_name.lower()) or (keyword.lower() in m.school_name.lower()):
+                    peserta_found.append(m)
+        else:
+            peserta_found = list_peserta
+        target = []
+        if opt:
+            for m in peserta_found:
+                if opt == 'bayar' and m.proof_of_payment:
+                    target.append(m)
+                elif opt == 'belumbayar' and not m.proof_of_payment:
+                    target.append(m)
+                elif not opt:
+                    target.append(m)
+        else:
+            target = peserta_found
+        paginator = Paginator(target, 25)
+        page = request.GET.get('page')
+        try:
+            peserta = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            peserta = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            peserta = paginator.page(paginator.num_pages)
+        return render(request, template,{
+            'list_peserta': peserta,
+            'keyword': keyword,
+        })
     else:
         return redirect('oktansite:index')
 
@@ -126,6 +126,7 @@ def list_peserta(request, success=None, deleted=None):
             'list_peserta': peserta,
             'success': success,
             'deleted': deleted,
+            'keyword': None,
         })
     else:
         return redirect('oktansite:index')
@@ -479,6 +480,7 @@ def administration(request):
                       'surabaya': 'Surabaya - Surabaya, Gresik, Lamongan, Mojokerto',
                       'tangerang': 'Tangerang',
                       'tasikmalaya': 'Tasikmalaya - Tasikmalaya, Ciamis, Garut, Banjar',
+                      'yogyakarta': 'Yogyakarta - Yogyakarta Raya',
                   }
             rayon = request.POST["rayon"]
             if rayon:
