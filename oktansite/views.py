@@ -74,7 +74,7 @@ def search_peserta(request):
                 opt = request.POST['opt']
             else:
                 opt = None
-        if (request.method == "GET"):
+        else:
             if 'keyword' in request.GET:
                 keyword = request.GET['keyword']
             else:
