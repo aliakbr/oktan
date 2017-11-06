@@ -65,16 +65,24 @@ def admin_dashboard(request, success=None, deleted=None):
 def search_peserta(request):
     template = 'oktan/daftarpendaftar.html'
     if request.user.is_staff:
-        if 'keyword' in request.POST:
-            keyword = request.POST['keyword']
-        else:
-            keyword = None
-        if 'keyword' in request.GET:
-            keyword = request.GET['keyword']
-        if opt in request.POST['opt']:
-            opt = request.POST['opt']
-        else:
-            opt = None
+        if (request.method == "POST"):
+            if 'keyword' in request.POST:
+                keyword = request.POST['keyword']
+            else:
+                keyword = None
+            if 'opt' in request.POST:
+                opt = request.POST['opt']
+            else:
+                opt = None
+        if (request.method == "GET"):
+            if 'keyword' in request.GET:
+                keyword = request.GET['keyword']
+            else:
+                keyword = None
+            if 'opt' in request.GET:
+                opt = request.GET['opt']
+            else:
+                opt = None
         list_peserta = Team.objects.get_queryset().order_by('id')
         peserta_found = []
         if keyword:
@@ -107,6 +115,7 @@ def search_peserta(request):
         return render(request, template,{
             'list_peserta': peserta,
             'keyword': keyword,
+            'opt': opt,
         })
     else:
         return redirect('oktansite:index')
@@ -130,6 +139,7 @@ def list_peserta(request, success=None, deleted=None):
             'success': success,
             'deleted': deleted,
             'keyword': None,
+            'opt': None,
         })
     else:
         return redirect('oktansite:index')

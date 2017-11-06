@@ -213,11 +213,11 @@
                     </a>
                   </li>
                     {% if list_peserta.has_previous %}
-                      <li><a href="?page={{ list_peserta.previous_page_number }}&keyword={{ keyword }}">Previous</a></li>
+                      <li><a href="?page={{ list_peserta.previous_page_number }}&keyword={{ keyword }}&opt={{ opt }}">Previous</a></li>
                     {% endif %}
                     <li class="active disabled"><a href="#">Page {{ list_peserta.number }} of {{ list_peserta.paginator.num_pages }}</a></li>
                     {% if list_peserta.has_next %}
-                      <li><a href="?page={{ list_peserta.next_page_number }}&keyword={{ keyword }}">Next</a></li>
+                      <li><a href="?page={{ list_peserta.next_page_number }}&keyword={{ keyword }}&opt={{ opt }}">Next</a></li>
                     {% endif %}
                     <li>
                     <a href="#" aria-label="Next">
